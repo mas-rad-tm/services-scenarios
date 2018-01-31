@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+
+    <class name="ch.globaz.tmmas.personnes.domain.model.HelloWorld" table="Helloworld" mutable="true">
+        <id name="id" column="id">
+            <generator class="org.hibernate.id.IdentityGenerator"/>
+        </id>
+
+        <property name="hello" column="hello" not-null="true"/>
+
+        <property name="world" column="world" not-null="true"/>
+
+    </class>
+
+</hibernate-mapping>
