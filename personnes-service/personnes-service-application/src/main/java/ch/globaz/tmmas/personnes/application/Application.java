@@ -64,6 +64,7 @@ public class Application {
 
 	}
 
+
 	private void checkProfilesIntegrity () {
 		Collection<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
 		if (activeProfiles.contains(Profiles.DEV.value()) && activeProfiles.contains(

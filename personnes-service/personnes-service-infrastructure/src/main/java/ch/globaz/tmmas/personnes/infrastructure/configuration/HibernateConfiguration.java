@@ -23,6 +23,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@Profile("!local")
 public class HibernateConfiguration {
 
 	@Value("${hibernate.driver-class-name}")

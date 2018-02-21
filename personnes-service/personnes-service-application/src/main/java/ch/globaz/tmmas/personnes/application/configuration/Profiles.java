@@ -3,9 +3,7 @@ package ch.globaz.tmmas.personnes.application.configuration;
 public enum Profiles {
 
 	DEV("dev"),
-	PRODUCTION("prod"),
-	IN_MEMORY_STORAGE("inMemory"),
-	HIBERNATE_STOARGE("hibernate");
+	PRODUCTION("prod");
 
 	private String profileValue;
 
