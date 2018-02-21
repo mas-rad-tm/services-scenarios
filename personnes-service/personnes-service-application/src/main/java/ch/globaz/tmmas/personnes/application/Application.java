@@ -13,10 +13,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
+import java.lang.reflect.Array;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Classe principale de l'application en mode jar.
@@ -45,7 +47,7 @@ public class Application {
 	public static void main(String []args)  {
 
 		SpringApplication app = new SpringApplication(Application.class);
-		DefaultProfileUtil.setDevelopmentProfile(app);
+		//DefaultProfileUtil.setDevelopmentProfile(app);
 
 		Environment env = app.run(args).getEnvironment();
 
@@ -57,21 +59,6 @@ public class Application {
 
 	@PostConstruct
 	public void initApplication() {
-
-		ResourceProperties prop = new ResourceProperties();
-		String[] staticLocation = prop.getStaticLocations();
-
-		LOGGER.info("***********************************************************************");
-		LOGGER.info("                     *** Static location paths ***                     ");
-		LOGGER.info("***********************************************************************");
-
-		LOGGER.info("Profile(s) : {} ",env.getActiveProfiles());
-
-		Arrays.asList(staticLocation).forEach(location -> {
-			LOGGER.info(location);
-		});
-
-		LOGGER.info("***********************************************************************");
 
 		checkProfilesIntegrity();
 
@@ -86,7 +73,23 @@ public class Application {
 		}
 	}
 
+
+
 	private static void logInitApplicationContext (Environment env) {
+
+
+
+		ResourceProperties prop = new ResourceProperties();
+		String[] staticLocation = prop.getStaticLocations();
+		LOGGER.info("***********************************************************************");
+		LOGGER.info("*                     *** Static location paths ***                   *");
+		LOGGER.info("***********************************************************************");
+
+		Arrays.asList(staticLocation).forEach(location -> {
+			LOGGER.info("* {}",location);
+		});
+		LOGGER.info("***********************************************************************");
+
 
 		String externalAdress;
 
@@ -95,25 +98,28 @@ public class Application {
 		} catch (UnknownHostException e) {
 			externalAdress = "Undefined";
 		}
-
-
 		LOGGER.info("***********************************************************************");
-		LOGGER.info("            *** Application context configuration ***                   ");
+		LOGGER.info("*            *** Application context configuration ***                *");
 		LOGGER.info("***********************************************************************");
 
-		LOGGER.info("Application '{}' is running!",env.getProperty("spring.application.name"));
-		LOGGER.info("Local      : localhost:{}{}",env.getProperty("server.port"), env
-				.getProperty
-				("server" +
-				".contextPath"));
-		LOGGER.info("External   : {}:{}{}",externalAdress, env.getProperty("server.port"),
+		LOGGER.info("* Application '{}' is running!",env.getProperty("spring.application.name"));
+		LOGGER.info("* Local      : localhost:{}{}",
+				env.getProperty("server.port"), env.getProperty("server.contextPath"));
+		LOGGER.info("* External   : {}:{}{}",externalAdress, env.getProperty("server.port"),
 				env.getProperty("server.contextPath"));
-		LOGGER.info("Profile(s) : {} ",env.getActiveProfiles());
-		LOGGER.info("HTTP Proxy : {}:{} ",System.getProperties().getProperty("http.proxyHost"),
+
+		String activeProfiles = Arrays.asList(env.getActiveProfiles()).stream()
+				.collect( Collectors.joining( "," ) );
+		LOGGER.info("* Profile(s) : {} ",activeProfiles);
+		LOGGER.info("* HTTP Proxy : {}:{} ",System.getProperties().getProperty("http.proxyHost"),
 				System.getProperties().getProperty("http.proxyPort"));
-		LOGGER.info("HTTPS Proxy: {}:{} ",System.getProperties().getProperty("https.proxyHost"),
+		LOGGER.info("* HTTPS Proxy: {}:{} ",System.getProperties().getProperty("https.proxyHost"),
 				System.getProperties().getProperty("https.proxyPort"));
 		LOGGER.info("***********************************************************************");
+
+
+
+
 
 	}
 }

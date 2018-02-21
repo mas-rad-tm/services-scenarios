@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Profile("hibernate")
+
 @Component
 public class HelloWorldHibernateRepository extends HibernateRepository implements HelloWorldRepository {
 

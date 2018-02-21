@@ -18,7 +18,7 @@
 
     <!-- ****** Profiles maven ****** -->
     <profiles>
-        <!-- Profil intelij, à activer pour profiter des fonctionnalités de run/debug pour intelij -->
+        <!--Profil intelij, à activer pour profiter des fonctionnalités de run/debug pour intelij -->
         <profile>
             <id>intellij</id>
             <dependencies>
