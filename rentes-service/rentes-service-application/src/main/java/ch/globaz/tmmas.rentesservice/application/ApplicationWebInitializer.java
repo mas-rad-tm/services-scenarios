@@ -1,6 +1,6 @@
-package ch.globaz.tmmas.personnes.application;
+package ch.globaz.tmmas.rentesservice.application;
 
-import ch.globaz.tmmas.personnes.application.configuration.DefaultProfileUtil;
+import ch.globaz.tmmas.rentesservice.application.configuration.DefaultProfileUtil;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +17,6 @@ public class ApplicationWebInitializer extends SpringBootServletInitializer {
 
 		//DefaultProfileUtil.setProdProfile(application.application());
 		DefaultProfileUtil.setDevelopmentProfile(application.application());
-		return application.sources(PersonnesServiceApplication.class);
+		return application.sources(RentesServiceApplication.class);
 	}
 }

@@ -1,4 +1,4 @@
-package ch.globaz.tmmas.personnes.infrastructure.configuration;
+package ch.globaz.tmmas.rentesservice.infrastructure.configuration;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +73,7 @@ public class HibernateConfiguration {
 	public LocalSessionFactoryBean sessionFactory() {
 		final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] { "ch.globaz.tmmas.personnesservices" });
+		sessionFactory.setPackagesToScan(new String[] { "ch.globaz.tmmas.rentesservice" });
 		sessionFactory.setHibernateProperties(hibernateProperties());
 
 		sessionFactory.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));

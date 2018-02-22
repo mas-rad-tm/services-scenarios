@@ -6,17 +6,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- ****** artifact description ****** -->
-    <groupId>ch.globaz</groupId>
-    <artifactId>spring-backend</artifactId>
+    <groupId>ch.globaz.tmmas</groupId>
+    <artifactId>rentes-service</artifactId>
     <packaging>pom</packaging>
     <description>Module parent pour le backend de référence</description>
     <version>1.0.0-SNAPSHOT</version>
 
     <!-- ****** Modules applicatifs ****** -->
     <modules>
-        <module>spring-backend-application</module>
-        <module>spring-backend-infrastructure</module>
-        <module>spring-backend-domain</module>
+        <module>rentes-service-application</module>
+        <module>rentes-service-infrastructure</module>
+        <module>rentes-service-domain</module>
     </modules>
 
     <!-- ****** Propriétés ****** -->
@@ -30,7 +30,7 @@
         <logback.version>1.2.3</logback.version>
         <logback.encoder.version>4.11</logback.encoder.version>
         <hibernate.version>5.2.12.Final</hibernate.version>
-        <db2.driver.version>4.12.55</db2.driver.version>
+        <db2.driver.version>10.1</db2.driver.version>
         <tomcat.jdbc.version>9.0.2</tomcat.jdbc.version>
         <junit.version>4.12</junit.version>
         <assertJ.version>3.9.0</assertJ.version>
@@ -59,20 +59,20 @@
             <!-- ****** Modules applicatifs ****** -->
             <!-- ********************************* -->
             <dependency>
-                <groupId>ch.globaz</groupId>
-                <artifactId>spring-backend-application</artifactId>
+                <groupId>ch.globaz.tmmas</groupId>
+                <artifactId>rentes-service-application</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>ch.globaz</groupId>
-                <artifactId>spring-backend-domain</artifactId>
+                <groupId>ch.globaz.tmmas</groupId>
+                <artifactId>rentes-service-domain</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>ch.globaz</groupId>
-                <artifactId>spring-backend-infrastructure</artifactId>
+                <groupId>ch.globaz.tmmas</groupId>
+                <artifactId>rentes-service-infrastructure</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
 
@@ -372,5 +372,15 @@
         </plugins>
 
     </build>
+
+    <!-- repositories aalfresco pour db2 -->
+    <repositories>
+        <repository>
+            <id>alfresco</id>
+            <name>alfresco</name>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
+        </repository>
+
+    </repositories>
 
 </project>

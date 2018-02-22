@@ -39,7 +39,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>ch.globaz.tmmas.personnes.application.Application</mainClass>
+                    <mainClass>ch.globaz.tmmas.personnes.application.PersonnesServiceApplication</mainClass>
                     <fork>true</fork>
                     <skip>false</skip>
                 </configuration>
