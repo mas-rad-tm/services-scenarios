@@ -17,6 +17,12 @@
     <packaging>${application.packaging.type}</packaging>
 
 
+    <!-- ****** Propriétés ****** -->
+    <properties>
+        <logback.version>1.2.3</logback.version>
+        <logback.encoder.version>4.11</logback.encoder.version>
+        <project.build.encoding>UTF-8</project.build.encoding>
+    </properties>
 
 
     <!-- ****** Profiles maven ****** -->

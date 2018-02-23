@@ -15,7 +15,7 @@
     <!-- file json formattage -->
     <appender name="JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${loggign.path}/personnes-service/personnes-service-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${logging.path}/config-server/config-server-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <maxFileSize>10MB</maxFileSize>
             <totalSizeCap>100MB</totalSizeCap>
@@ -24,7 +24,7 @@
     </appender>
 
     <logger name="ch.globaz.tmmas" level="DEBUG" />
-    <logger name="com.ibm.db2.jcc" level="DEBUG"/>
+
 
     <!-- ********** autre configuration utile p.ex ********** -->
     <!--
