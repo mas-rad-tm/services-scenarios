@@ -16,6 +16,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -108,15 +109,26 @@ public class PersonnesServiceApplication {
 		String activeProfiles = Arrays.asList(env.getActiveProfiles()).stream()
 				.collect( Collectors.joining( "," ) );
 		LOGGER.info("* Profile(s) : {} ",activeProfiles);
-		LOGGER.info("* HTTP Proxy : {}:{} ",System.getProperties().getProperty("http.proxyHost"),
-				System.getProperties().getProperty("http.proxyPort"));
-		LOGGER.info("* HTTPS Proxy: {}:{} ",System.getProperties().getProperty("https.proxyHost"),
-				System.getProperties().getProperty("https.proxyPort"));
+
+		logProxyInfo();
+
 		LOGGER.info("***********************************************************************");
 
 
+	}
 
 
+	private static void logProxyInfo() {
+
+		Optional<String> httpProxy = Optional.ofNullable(System.getProperties().getProperty("http.proxyHost"));
+		Optional<String> httpsProxy = Optional.ofNullable(System.getProperties().getProperty("https.proxyHost"));
+
+		if(httpProxy.isPresent()){
+			LOGGER.info("* HTTP Proxy : {}:{} ",httpProxy,
+					System.getProperties().getProperty("http.proxyPort"));
+			LOGGER.info("* HTTPS Proxy: {}:{} ",httpsProxy,
+					System.getProperties().getProperty("https.proxyPort"));
+		}
 
 	}
 }
