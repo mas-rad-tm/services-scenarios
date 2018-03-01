@@ -4,6 +4,28 @@
 # app name
 spring:
 
+  application:
+    name:                                                    personnes-service
+
+# active profile
+  profiles:
+    active:                                                  dev,db2
+#dev h2
+#spring.profiles.active=dev
+
+#config branche
+  cloud:
+    config:
+      label:                                                 personnes-service
+
+# config uri
+      uri:                                                   http://localhost:8100/config
+
+# url format : /{apname}/{profile}/{label}/{filename}
+logging:
+  config:                                                    http://localhost:8100/config/personnes-service/default/personnes-service/logback-spring.xml
+
+
   profiles:
     active:             dev
 
@@ -19,6 +41,7 @@ spring:
 logging:
   # url format : /{apname}/{profile}/{label}/{filename}
   config:               http://localhost:8100/config/personnes-service/default/personnes-service/logback-spring.xml
+
 
 
 

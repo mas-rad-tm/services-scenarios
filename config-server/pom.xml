@@ -13,7 +13,8 @@
         <logback.version>1.2.3</logback.version>
         <logback.encoder.version>4.11</logback.encoder.version>
         <project.build.encoding>UTF-8</project.build.encoding>
-        <spring-boot.version>1.5.8.RELEASE</spring-boot.version>
+        <spring-boot.version>1.5.10.RELEASE</spring-boot.version>
+        <spring-cloud-dependencies.version>Camden.SR7</spring-cloud-dependencies.version>
     </properties>
 
     <!-- ****** Gestion des dépendances ****** -->
@@ -32,7 +33,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Edgware.SR2</version>
+                <version>${spring-cloud-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

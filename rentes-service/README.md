@@ -1,6 +1,7 @@
-# Spring Backend Globaz
-Projet de référence pour les backend Spring basés sur l'architecture hexagonale
+# Architecture distribuée
+Projet d'architecture distribuée basé sur Spring
 
+## Configuration centralisée
 
 ## Build du projet
 ###1. Avec maven, génération d'une archive web (war) et des sources

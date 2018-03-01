@@ -97,6 +97,7 @@
             <artifactId>spring-cloud-starter-eureka</artifactId>
         </dependency>
 
+
         <!-- embeded tomcat -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

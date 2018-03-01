@@ -21,8 +21,10 @@
 
     <!-- ****** Propriétés ****** -->
     <properties>
-        <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
+        <spring-boot.version>1.5.10.RELEASE</spring-boot.version>
         <spring.version>4.3.13.RELEASE</spring.version>
+        <spring-cloud-dependencies.version>Camden.SR7</spring-cloud-dependencies.version>
+
         <maven-war.plugin.version>3.2.0</maven-war.plugin.version>
         <maven-source.plugin>3.0.1</maven-source.plugin>
         <application.packaging.type>war</application.packaging.type>
@@ -37,7 +39,7 @@
         <swagger.version>2.6.1</swagger.version>
         <lombok.version>1.16.20</lombok.version>
         <project.build.encoding>UTF-8</project.build.encoding>
-        <spring-config-client.version>1.4.2.RELEASE</spring-config-client.version>
+
     </properties>
 
     <!-- ****** Profils maven ****** -->
@@ -92,6 +94,14 @@
                 <scope>import</scope>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!-- spring web mvc-->
             <!--
             repo: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
@@ -141,6 +151,7 @@
                 <version>${spring-boot.version}</version>
             </dependency>
 
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -149,11 +160,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-config</artifactId>
-                <version>${spring-config-client.version}</version>
-            </dependency>
+           
 
 
             <!-- ********************************* -->
