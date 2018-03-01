@@ -3,6 +3,7 @@
 #####################################################################
 # app name
 spring:
+
   application:
     name:                                               rentes-service
 
@@ -20,6 +21,25 @@ spring:
       uri:                                              http://localhost:8100/config
 
 
+  profiles:
+    active:             dev
+
+  application:
+    name:               rentes-service
+
+  cloud:
+    config:
+      label:            rentes-service
+      uri:              http://localhost:8100/config
+
+
+
 logging:
   # url format : /{apname}/{profile}/{label}/{filename}
+
   config:                                               http://localhost:8100/config/rentes-service/default/rentes-service/logback-spring.xml
+
+
+
+
+
