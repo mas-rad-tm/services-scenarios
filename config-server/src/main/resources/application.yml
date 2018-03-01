@@ -1,0 +1,54 @@
+#####################################################################
+# Configuration Spring de base
+#####################################################################
+server:
+  port:                                     8100
+  contextPath:                              /config
+
+spring:
+  application:
+    name:                                   config-server
+
+#####################################################################
+# Configuration Spring cloud
+#####################################################################
+  cloud:
+    config:
+      server.git.uri:                       https://github.com/mas-rad-tm/config-repo
+
+#####################################################################
+# Configuration Spring actuator
+#####################################################################
+management:
+  security:
+    enabled:                                 false
+  context-path:                              /actuator
+
+# configuration des endpoints
+endpoints:
+  hypermedia:
+    enabled:                                 true
+
+  actuator:
+    enabled:                                 true
+
+  beans:
+    enabled:                                 true
+
+  env:
+    enabled:                                 true
+
+  metrics:
+    enabled:                                 true
+
+  health:
+    enabled:                                 true
+
+  mappings:
+    enabled:                                 true
+
+  docs:
+    enabled:                                 true
+
+  logfile:
+    enabled:                                 true
