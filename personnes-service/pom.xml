@@ -42,6 +42,7 @@
         <assertJ.version>3.9.0</assertJ.version>
         <swagger.version>2.6.1</swagger.version>
         <lombok.version>1.16.20</lombok.version>
+        <spring-eureka-client.version>1.0.0.RELEASE</spring-eureka-client.version>
 
         <project.build.encoding>UTF-8</project.build.encoding>
 
@@ -151,9 +152,23 @@
 
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-config</artifactId>
-                <version>${spring-config-client.version}</version>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Camden.SR7</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
+
+            <!--<dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-config</artifactId>
+                &lt;!&ndash;<version>${spring-config-client.version}</version>&ndash;&gt;
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-eureka</artifactId>
+                &lt;!&ndash;<version>${spring-eureka-client.version}</version>&ndash;&gt;
+            </dependency>-->
 
             <!-- ********************************* -->
             <!-- ******** Persistence ************ -->
