@@ -1,0 +1,41 @@
+info:
+  component: Edge Server
+
+management:
+  security:
+    enabled: false
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+zuul:
+  prefix: /api/v1
+  routes:
+    rentes:
+      path: /rentes/**
+      #serviceId: rentes-service
+      url: http://localhost:9020
+    personnes:
+      path: /personnes/**
+      serviceId: personnes-service
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${DISCOVERY_URL:http://localhost:8761/eureka/}
+    registerWithEureka: true
+
+ribbon:
+  eureka:
+    enabled: true
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
