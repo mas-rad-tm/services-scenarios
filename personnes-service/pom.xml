@@ -71,24 +71,6 @@
             </properties>
         </profile>
 
-        <profile>
-            <id>mobile</id>
-
-            <properties>
-                <db2.driver.version>10.1</db2.driver.version>
-            </properties>
-
-            <!-- repositories aalfresco pour db2 -->
-            <repositories>
-                <repository>
-                    <id>alfresco</id>
-                    <name>alfresco</name>
-                    <url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
-                </repository>
-            </repositories>
-
-        </profile>
-
     </profiles>
 
     <!-- ****** Gestion des dépendances ****** -->
