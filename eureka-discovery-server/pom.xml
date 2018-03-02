@@ -5,21 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ch.globaz.tmmas</groupId>
-    <artifactId>config-server</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>eureka-discovery-server</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
-    <!-- ****** Propriétés ****** -->
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
         <logback.version>1.2.3</logback.version>
         <logback.encoder.version>4.11</logback.encoder.version>
         <project.build.encoding>UTF-8</project.build.encoding>
         <spring-boot.version>1.5.10.RELEASE</spring-boot.version>
-        <spring-cloud-dependencies.version>Camden.SR7</spring-cloud-dependencies.version>
     </properties>
 
-    <!-- ****** Gestion des dépendances ****** -->
-    <dependencyManagement>
 
+    <dependencyManagement>
         <dependencies>
 
             <dependency>
@@ -33,27 +32,9 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud-dependencies.version}</version>
+                <version>Camden.SR7</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <!-- actuator spring metrics
-           repo: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
-           doc: https://docs.spring.io/spring-boot/docs/1.5.9.RELEASE/reference/htmlsingle/ -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-
-            <!-- actuator docs
-            repo: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-actuator-docs
-            doc: https://docs.spring.io/spring-boot/docs/1.5.9.RELEASE/reference/htmlsingle -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-actuator-docs</artifactId>
-                <version>${spring-boot.version}</version>
             </dependency>
 
             <!-- ****** Logging ****** -->
@@ -86,42 +67,32 @@
                 <version>${logback.encoder.version}</version>
             </dependency>
         </dependencies>
-
     </dependencyManagement>
 
-    <dependencies>
 
-        <!-- client config server -->
+    <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
+            <artifactId>spring-cloud-starter-eureka-server</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
-       <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-actuator-docs</artifactId>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
-
-        <!-- logging -->
-
-                <dependency>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-classic</artifactId>
-                    <scope>runtime</scope>
-                </dependency>
-
-
-                <dependency>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-core</artifactId>
-                    <scope>runtime</scope>
-                </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 
         <dependency>
             <groupId>net.logstash.logback</groupId>
@@ -130,21 +101,15 @@
 
     </dependencies>
 
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
+
 
 </project>
