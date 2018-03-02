@@ -15,7 +15,9 @@ spring:
   cloud:
     config:
       server.git.uri:                       https://github.com/mas-rad-tm/config-repo
-
+      # ne pas ecraser les arguments jvm
+      overrideSystemProperties:             false
+      overrideNone:                         true
 #####################################################################
 # Configuration Spring actuator
 #####################################################################

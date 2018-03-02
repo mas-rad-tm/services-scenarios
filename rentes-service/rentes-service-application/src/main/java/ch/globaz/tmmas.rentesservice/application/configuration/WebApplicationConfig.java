@@ -1,4 +1,4 @@
-package ch.globaz.springbackend.application.configuration;
+package ch.globaz.tmmas.rentesservice.application.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;

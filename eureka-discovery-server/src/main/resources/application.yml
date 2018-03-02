@@ -1,0 +1,22 @@
+#####################################################################
+# Configuration Spring de base
+#####################################################################
+spring:
+  application:
+    name:                   eureka-discovery-server
+
+server:
+  port:                     8761
+
+
+#désactivation auto-découverte
+eureka:
+  client:
+    register-with-eureka:   false
+
+    fetch-registry:         false
+
+logging:
+  level:
+    com.netflix.eureka:     OFF
+    com.netflix.discovery:  OFF

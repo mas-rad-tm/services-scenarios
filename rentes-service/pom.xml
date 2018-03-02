@@ -39,6 +39,7 @@
         <swagger.version>2.6.1</swagger.version>
         <lombok.version>1.16.20</lombok.version>
         <project.build.encoding>UTF-8</project.build.encoding>
+        <h2.driver.version>1.4.196</h2.driver.version>
 
     </properties>
 
@@ -52,6 +53,9 @@
                 <application.packaging.type>jar</application.packaging.type>
             </properties>
         </profile>
+
+
+
     </profiles>
 
     <!-- ****** Gestion des dépendances ****** -->
@@ -185,6 +189,11 @@
                 <version>${db2.driver.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.driver.version}</version>
+            </dependency>
             <!-- sprnig orm module
             repo: https://mvnrepository.com/artifact/org.springframework/spring-orm
             doc: https://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/orm.html -->

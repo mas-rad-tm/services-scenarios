@@ -44,9 +44,9 @@
         <assertJ.version>3.9.0</assertJ.version>
         <swagger.version>2.6.1</swagger.version>
         <lombok.version>1.16.20</lombok.version>
-        <spring-eureka-client.version>1.0.0.RELEASE</spring-eureka-client.version>
 
         <project.build.encoding>UTF-8</project.build.encoding>
+        <h2.driver.version>1.4.196</h2.driver.version>
 
     </properties>
 
@@ -171,11 +171,6 @@
 
 
 
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-eureka</artifactId>
-                &lt;!&ndash;<version>${spring-eureka-client.version}</version>&ndash;&gt;
-            </dependency>-->
 
             <!-- ********************************* -->
             <!-- ******** Persistence ************ -->
@@ -200,7 +195,11 @@
                 <version>${db2.driver.version}</version>
             </dependency>
 
-
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.driver.version}</version>
+            </dependency>
 
 
             <!-- sprnig orm module
