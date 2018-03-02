@@ -36,7 +36,10 @@
         <logback.version>1.2.3</logback.version>
         <logback.encoder.version>4.11</logback.encoder.version>
         <hibernate.version>5.2.12.Final</hibernate.version>
+
         <db2.driver.version>10.1</db2.driver.version>
+
+
         <tomcat.jdbc.version>9.0.2</tomcat.jdbc.version>
         <junit.version>4.12</junit.version>
         <assertJ.version>3.9.0</assertJ.version>
@@ -56,6 +59,31 @@
             <properties>
                 <application.packaging.type>jar</application.packaging.type>
             </properties>
+        </profile>
+
+        <profile>
+            <id>globaz</id>
+            <properties>
+                <db2.driver.version>4.12.55</db2.driver.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>mobile</id>
+
+            <properties>
+                <db2.driver.version>10.1</db2.driver.version>
+            </properties>
+
+            <!-- repositories aalfresco pour db2 -->
+            <repositories>
+                <repository>
+                    <id>alfresco</id>
+                    <name>alfresco</name>
+                    <url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
+                </repository>
+            </repositories>
+
         </profile>
 
     </profiles>
@@ -391,14 +419,6 @@
 
     </build>
 
-    <!-- repositories aalfresco pour db2 -->
-    <repositories>
-        <repository>
-            <id>alfresco</id>
-            <name>alfresco</name>
-            <url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
-        </repository>
 
-    </repositories>
 
 </project>
