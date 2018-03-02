@@ -1,0 +1,21 @@
+#####################################################################
+# Configuration Spring de base
+#####################################################################
+# app name
+spring:
+
+  application:
+    name:                                               rentes-service
+
+# active profile
+  profiles:
+    active:                                             dev,db2
+#dev h2
+#spring.profiles.active=dev
+
+#config branche
+  cloud:
+    config:
+      label:                                            rentes-service
+# config uri
+      uri:                                              http://localhost:8100/config
