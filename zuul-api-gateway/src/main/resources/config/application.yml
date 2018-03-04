@@ -30,11 +30,13 @@ zuul:
       path: /rentes/**
       serviceId: rentes-service
       stripPrefix: true
+      retryable: true
 
     personnes:
       path: /personnes/**
       serviceId: personnes-service
       stripPrefix: true
+      retryable: true
 
 
 eureka:
@@ -45,7 +47,16 @@ eureka:
 
 ribbon:
   eureka:
-    enabled: true
+      enabled: true
+  restclient:
+    enabled:             true
+  ReadTimeout:           5000
+  ConnectTimeout:        3000
+  maxAutoRetries:        1
+  MaxAutoRetriesNextServer: 2
+  OkToRetryOnAllOperations: true
+
+
 
 logging:
   level:

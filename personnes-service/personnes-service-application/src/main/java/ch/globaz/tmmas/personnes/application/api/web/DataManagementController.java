@@ -65,4 +65,24 @@ public class DataManagementController {
 
         return LocalDate.parse(df.format(date),formatter);
     }
+
+    private String getNss () {
+
+        StringBuilder nss = new StringBuilder("756.");
+        nss.append(faker.number().randomDigit());
+        nss.append(faker.number().randomDigit());
+        nss.append(faker.number().randomDigit());
+        nss.append(faker.number().randomDigit());
+        nss.append(".");
+        nss.append(faker.number().randomDigit());
+        nss.append(faker.number().randomDigit());
+        nss.append(faker.number().randomDigit());
+        nss.append(faker.number().randomDigit());
+        nss.append(".");
+        nss.append(faker.number().randomDigit());
+        nss.append(faker.number().randomDigit());
+
+        return nss.toString();
+
+    }
 }

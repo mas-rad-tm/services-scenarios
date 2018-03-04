@@ -15,6 +15,7 @@ public class PersonnePhysique {
     private String nom;
     private String prenom;
     private LocalDate dateNaissance;
+    private String nss;
 
     public PersonnePhysique(String nom, String prenom, LocalDate dateNaissance) {
         this.nom = nom;

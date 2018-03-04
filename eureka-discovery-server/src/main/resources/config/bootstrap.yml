@@ -16,3 +16,6 @@ spring:
       # fail fast si pas config server
       failFast:                                         true
 
+logging:
+  # url format : /{apname}/{profile}/{label}/{filename}
+  config:               http://localhost:8100/config/eureka-discovery-server/default/eureka-discovery-server/logback-spring.xml
