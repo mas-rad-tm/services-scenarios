@@ -176,13 +176,7 @@
             </dependency>
 
 
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Camden.SR7</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+
 
 
 
@@ -318,6 +312,13 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <!-- datafaker -->
+            <dependency>
+                <groupId>com.github.javafaker</groupId>
+                <artifactId>javafaker</artifactId>
+                <version>0.14</version>
             </dependency>
 
         </dependencies>

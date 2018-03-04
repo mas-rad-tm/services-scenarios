@@ -1,6 +1,6 @@
 server:
   port:                              ${PORT:8200}
- # contextPath:                       /gateway
+  contextPath:                       /gateway
 spring:
   application:
     name: gateway-service
