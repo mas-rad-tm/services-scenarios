@@ -29,7 +29,8 @@ public class PersonnesController {
 	public ResponseEntity<PersonnesPhysiqueDto> createPerson(@RequestBody PersonnesPhysiqueDto dto){
 		LOGGER.debug("createPerson(), {}",dto);
 
-		PersonnePhysique pp = personneService.sauve(PersonnePhysique.builder(dto.getNom(),dto.getPrenom(),dto.getDateNaissance()));
+		PersonnePhysique pp = personneService.sauve(PersonnePhysique.builder(dto.getNom(),dto.getPrenom(),dto
+				.getDateNaissance(),dto.getNss()));
 
 		LOGGER.debug("createPerson() return  {}",pp);
 

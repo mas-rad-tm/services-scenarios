@@ -45,6 +45,8 @@
         <project.build.encoding>UTF-8</project.build.encoding>
         <h2.driver.version>1.4.196</h2.driver.version>
 
+        <faker.version>0.14</faker.version>
+
     </properties>
 
     <!-- ****** Profils maven ****** -->
@@ -304,6 +306,13 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <!-- datafaker -->
+            <dependency>
+                <groupId>com.github.javafaker</groupId>
+                <artifactId>javafaker</artifactId>
+                <version>${faker.version}</version>
             </dependency>
 
         </dependencies>

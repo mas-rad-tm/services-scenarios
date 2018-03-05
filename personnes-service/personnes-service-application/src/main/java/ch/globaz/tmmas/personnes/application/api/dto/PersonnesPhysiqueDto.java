@@ -20,17 +20,20 @@ public class PersonnesPhysiqueDto {
 	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate dateNaissance;
 
+	private String nss;
+
 
 	public PersonnesPhysiqueDto(){}
 
 
-	private PersonnesPhysiqueDto(String nom, String prenom, String dateNaissance){
+	private PersonnesPhysiqueDto(String nom, String prenom, String dateNaissance, String nss){
 
 		this.nom = nom;
 		this.prenom = prenom;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
 		this.dateNaissance = LocalDate.parse(dateNaissance,formatter);
+		this.nss = nss;
 	}
 
 
@@ -46,9 +49,13 @@ public class PersonnesPhysiqueDto {
 		return prenom;
 	}
 
+	public String getNss () {
+		return nss;
+	}
+
 	public static PersonnesPhysiqueDto fromEntity(PersonnePhysique pp){
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		return new PersonnesPhysiqueDto(pp.nom(), pp.prenom(), pp.dateNaissance().format(formatter));
+		return new PersonnesPhysiqueDto(pp.nom(), pp.prenom(), pp.dateNaissance().format(formatter), pp.getNss());
 	}
 }

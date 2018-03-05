@@ -43,7 +43,7 @@ public class DataManagementController {
         Integer nbElements = Integer.valueOf(dto.getNbValeurs());
 
         IntStream.range(0,nbElements).forEach(iteration -> {
-            personneService.sauve(PersonnePhysique.builder(getNom(),getPrenom(),getDateNaissance()));
+            personneService.sauve(PersonnePhysique.builder(getNom(),getPrenom(),getDateNaissance(),getNss()));
         });
 
         LOGGER.debug("sample personns create, {} elements inserted",nbElements);

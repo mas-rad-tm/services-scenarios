@@ -46,9 +46,9 @@ public class ConfigServerApplication {
 
         LOGGER.info("* Application '{}' is running!",env.getProperty("spring.application.name"));
         LOGGER.info("* Local      : localhost:{}{}",
-                env.getProperty("server.port"), env.getProperty("server.contextPath"));
+                env.getProperty("server.port"), getContextPath(env));
         LOGGER.info("* External   : {}:{}{}",externalAdress, env.getProperty("server.port"),
-                env.getProperty("server.contextPath"));
+                getContextPath(env));
 
         String activeProfiles = Arrays.asList(env.getActiveProfiles()).stream()
                 .collect( Collectors.joining( "," ) );
@@ -59,6 +59,10 @@ public class ConfigServerApplication {
         logProxyInfo();
         LOGGER.info("***********************************************************************");
 
+    }
+
+    private static String getContextPath(Environment env) {
+        return Optional.ofNullable(env.getProperty("server.contextPath")).orElse("/");
     }
 
     private static void logProxyInfo() {

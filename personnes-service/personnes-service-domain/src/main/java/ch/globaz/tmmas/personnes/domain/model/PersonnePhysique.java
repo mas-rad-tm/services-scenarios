@@ -17,10 +17,11 @@ public class PersonnePhysique {
     private LocalDate dateNaissance;
     private String nss;
 
-    public PersonnePhysique(String nom, String prenom, LocalDate dateNaissance) {
+    public PersonnePhysique(String nom, String prenom, LocalDate dateNaissance, String nss) {
         this.nom = nom;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;
+        this.nss = nss;
     }
 
     public String nom() {
@@ -35,8 +36,12 @@ public class PersonnePhysique {
         return dateNaissance;
     }
 
-    public static PersonnePhysique builder(String nom, String prenom, LocalDate dateNaissance) {
-        return new PersonnePhysique(nom,prenom,dateNaissance);
+    public String getNss () {
+        return nss;
+    }
+
+    public static PersonnePhysique builder(String nom, String prenom, LocalDate dateNaissance, String nss) {
+        return new PersonnePhysique(nom,prenom,dateNaissance,nss);
     }
 
     //hibernate

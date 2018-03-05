@@ -16,6 +16,9 @@
 
         <property name="dateNaissance" column="dateNaissance" not-null="true"/>
 
+        <property name="nss" column="nss" not-null="true"/>
+
+
     </class>
 
 </hibernate-mapping>
