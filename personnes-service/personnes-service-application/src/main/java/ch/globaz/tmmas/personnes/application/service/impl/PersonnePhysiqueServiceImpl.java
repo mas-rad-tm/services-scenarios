@@ -14,7 +14,7 @@ import java.util.List;
  * ${VERSION}
  */
 @Component
-public class PersonnePhysiqueImpl implements PersonnePhysiqueService {
+public class PersonnePhysiqueServiceImpl implements PersonnePhysiqueService {
 
     @Autowired
     PersonnePhysiqueRepository repository;
@@ -27,5 +27,15 @@ public class PersonnePhysiqueImpl implements PersonnePhysiqueService {
     @Override
     public List<PersonnePhysique> getAll() {
         return repository.getAll();
+    }
+
+    @Override
+    public Long countPersonnePhysique() {
+        return repository.countAllTiers();
+    }
+
+    @Override
+    public PersonnePhysique getById(Long id) {
+        return repository.getById(id);
     }
 }

@@ -9,4 +9,8 @@ public interface PersonnePhysiqueService {
 	PersonnePhysique sauve(PersonnePhysique helloWorld);
 
 	List<PersonnePhysique> getAll();
+
+	Long countPersonnePhysique();
+
+	PersonnePhysique getById(Long id);
 }

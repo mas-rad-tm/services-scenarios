@@ -8,6 +8,9 @@ public interface PersonnePhysiqueRepository {
 
 	PersonnePhysique store(PersonnePhysique pp);
 
-
 	List<PersonnePhysique> getAll();
+
+	Long countAllTiers();
+
+	PersonnePhysique getById(Long personneId);
 }

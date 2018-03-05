@@ -26,4 +26,28 @@ public class PersonnePhysiqueHibernateRepository extends HibernateRepository imp
 		return getSession().createQuery("FROM " + PersonnePhysique.class.getSimpleName()).list();
 
 	}
+
+	@Transactional
+	@Override
+	public Long countAllTiers() {
+
+		Long count = (Long)getSession().createQuery("SELECT COUNT(1) FROM  " + PersonnePhysique.class.getSimpleName())
+				.getSingleResult();
+
+		return count;
+
+	}
+
+	@Transactional
+	@Override
+	public PersonnePhysique getById(Long personneId) {
+
+		PersonnePhysique pp = getSession().get(PersonnePhysique.class,personneId);
+
+		return pp;
+
+	}
+
+
+
 }

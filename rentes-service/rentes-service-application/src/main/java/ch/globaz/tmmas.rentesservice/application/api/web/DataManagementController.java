@@ -1,8 +1,11 @@
 package ch.globaz.tmmas.rentesservice.application.api.web;
 
 
+import ch.globaz.tmmas.rentesservice.application.api.dto.PersonnesPhysiqueDto;
 import ch.globaz.tmmas.rentesservice.application.api.dto.datamanagement.SampleDataDto;
+import ch.globaz.tmmas.rentesservice.application.service.FeignPersonnesPhysiqueService;
 import ch.globaz.tmmas.rentesservice.application.service.RenteService;
+import ch.globaz.tmmas.rentesservice.application.service.RestTemplatePersonnesPhysiqueService;
 import ch.globaz.tmmas.rentesservice.domain.model.Rente;
 import com.github.javafaker.Faker;
 import org.slf4j.Logger;
@@ -20,8 +23,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
-import java.util.stream.IntStream;
 
 @RestController
 @RequestMapping("/data")
@@ -33,6 +36,13 @@ public class DataManagementController {
     RenteService renteService;
 
 
+    @Autowired
+    FeignPersonnesPhysiqueService personnePhysiqueService;
+
+    @Autowired
+    RestTemplatePersonnesPhysiqueService restTemplatePersonnesPhysiqueService;
+
+
 
     static final Faker faker = new Faker(new Locale("fr"));
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -40,18 +50,65 @@ public class DataManagementController {
 
     @RequestMapping(value = "/sample",method = RequestMethod.POST)
     public ResponseEntity<String> createRentesSampleData(@RequestBody SampleDataDto dto){
-        LOGGER.debug("createPerson(), {}",dto);
+        LOGGER.debug("createPerson data samples(), {} elements to generate",dto.getNbValeurs());
 
-        Integer nbElements = Integer.valueOf(dto.getNbValeurs());
+        //récupération du nombre de valeurs à générer
+        Integer nbRentesToGenerate = Integer.valueOf(dto.getNbValeurs());
+        //récupérationd personnes physiques
+        List<PersonnesPhysiqueDto> personnesPhysiques  = personnePhysiqueService.getPersonnesPhysique();
+        Integer nbOfPersonnesPhysique = personnesPhysiques.size();
 
-        IntStream.range(0,nbElements).forEach(iteration -> {
-            renteService.sauve(Rente.builder(getNumero(),getRequerantId(),getDateEnregistrement()));
+        //plafin nbRentes a geerer
+        Integer nbRentesToGenereateEffective = (nbRentesToGenerate < nbOfPersonnesPhysique) ? nbRentesToGenerate :
+                nbOfPersonnesPhysique;
+
+        LOGGER.debug("createPerson data samples(), found {} personnesPhysique, so {} rentes will be generated ",
+                nbOfPersonnesPhysique,nbOfPersonnesPhysique);
+
+        //iteration sur les personnes, et generation des rentes
+        personnesPhysiques.subList(0,nbRentesToGenereateEffective).stream().forEach(personne -> {
+
+            Rente rente = Rente.builder(getNumero(),personne.getId(),LocalDate.now());
+
+            renteService.sauve(rente);
+
         });
 
-        LOGGER.debug("sample rente create, {} elements inserted",nbElements);
 
-        return new ResponseEntity<String>("OK, " + nbElements + " Created",HttpStatus.CREATED);
+        return new ResponseEntity<String>("OK,  "+ nbRentesToGenereateEffective +" rentes Created",HttpStatus.CREATED);
     }
+
+    @RequestMapping(value = "/sample-rt",method = RequestMethod.POST)
+    public ResponseEntity<String> createRentesSampleDataWithRestTemplate(@RequestBody SampleDataDto dto){
+        LOGGER.debug("createPerson data samples(), {} elements to generate",dto.getNbValeurs());
+
+        //récupération du nombre de valeurs à générer
+        Integer nbRentesToGenerate = Integer.valueOf(dto.getNbValeurs());
+        //récupérationd personnes physiques
+        List<PersonnesPhysiqueDto> personnesPhysiques  = restTemplatePersonnesPhysiqueService.getPersonnesPhysique();
+        Integer nbOfPersonnesPhysique = personnesPhysiques.size();
+
+        //plafin nbRentes a geerer
+        Integer nbRentesToGenereateEffective = (nbRentesToGenerate < nbOfPersonnesPhysique) ? nbRentesToGenerate :
+                nbOfPersonnesPhysique;
+
+        LOGGER.debug("createPerson data samples(), found {} personnesPhysique, so {} rentes will be generated ",
+                nbOfPersonnesPhysique,nbOfPersonnesPhysique);
+
+        //iteration sur les personnes, et generation des rentes
+        personnesPhysiques.subList(0,nbRentesToGenereateEffective).stream().forEach(personne -> {
+
+            Rente rente = Rente.builder(getNumero(),personne.getId(),LocalDate.now());
+
+            renteService.sauve(rente);
+
+        });
+
+
+        return new ResponseEntity<String>("OK,  "+ nbRentesToGenereateEffective +" rentes Created",HttpStatus.CREATED);
+    }
+
+
 
     private String getNumero () {
         return String.valueOf(faker.number().numberBetween(10000,99999));

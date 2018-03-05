@@ -6,13 +6,12 @@ import ch.globaz.tmmas.personnes.domain.model.PersonnePhysique;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,12 +36,41 @@ public class PersonnesController {
 		return new ResponseEntity<>(PersonnesPhysiqueDto.fromEntity(pp), HttpStatus.CREATED);
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/{personneId}")
+	public ResponseEntity<PersonnesPhysiqueDto> getPersonnById(@PathVariable Long personneId){
+
+		LOGGER.debug("getPersonById(), {}",personneId);
+
+		PersonnePhysique pp = personneService.getById(personneId);
+
+		PersonnesPhysiqueDto dto = PersonnesPhysiqueDto.fromEntity(pp);
+
+		LOGGER.debug("getPersonById() return  {}",dto);
+
+		return new ResponseEntity<>(dto, HttpStatus.OK);
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<PersonnesPhysiqueDto>> getHello(){
+	public ResponseEntity<List<PersonnesPhysiqueDto>> getHello(@RequestParam(value = "countOnly", required = false)
+			                                                               String countOnlyValue){
 
-		List<PersonnePhysique> hws = personneService.getAll();
+		Boolean countOnly = Boolean.valueOf(countOnlyValue);
+		List<PersonnePhysique> hws;
+		HttpHeaders headers = new HttpHeaders();
+		Long numberOfEntries = personneService.countPersonnePhysique();
 
-		return new ResponseEntity<>(getAllAsDto(hws), HttpStatus.OK);
+		headers.add("X-Total-Count", String.valueOf(numberOfEntries));
+
+		if(countOnly){
+			hws = new ArrayList<>();
+
+		}else{
+			hws = personneService.getAll();
+		}
+
+
+
+		return new ResponseEntity<>(getAllAsDto(hws),headers, HttpStatus.OK);
 	}
 
 	private List<PersonnesPhysiqueDto> getAllAsDto (List<PersonnePhysique> ppList) {
