@@ -20,6 +20,11 @@
             <artifactId>rentes-service-domain</artifactId>
         </dependency>
 
+       <!-- <dependency>
+            <groupId>ch.globaz.tmmas</groupId>
+            <artifactId>rentes-service-application</artifactId>
+        </dependency>-->
+
         <dependency>
             <groupId>com.ibm.db2.jcc</groupId>
             <artifactId>db2jcc4</artifactId>
@@ -46,6 +51,7 @@
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jdbc</artifactId>
         </dependency>
+
 
 
     </dependencies>
