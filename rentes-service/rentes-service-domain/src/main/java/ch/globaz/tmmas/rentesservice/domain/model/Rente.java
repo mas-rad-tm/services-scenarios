@@ -1,7 +1,10 @@
 package ch.globaz.tmmas.rentesservice.domain.model;
 
+import lombok.ToString;
+
 import java.time.LocalDate;
 
+@ToString
 public class Rente {
 
     private String numero;

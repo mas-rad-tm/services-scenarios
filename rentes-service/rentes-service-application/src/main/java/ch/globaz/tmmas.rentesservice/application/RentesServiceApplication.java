@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration;
+import org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -30,10 +32,11 @@ import java.util.stream.Collectors;
  */
 
 @Configuration
-@EnableAutoConfiguration(exclude = HibernateJpaAutoConfiguration.class)
+@EnableAutoConfiguration(exclude = {HibernateJpaAutoConfiguration.class,ActiveMQAutoConfiguration.class, JmsAutoConfiguration.class})
 @EnableDiscoveryClient
 @EnableFeignClients
 @ComponentScan(basePackages = "ch.globaz.tmmas.rentesservice")
+
 public class RentesServiceApplication {
 
 

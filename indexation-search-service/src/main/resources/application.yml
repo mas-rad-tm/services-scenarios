@@ -1,0 +1,9 @@
+server:
+  port: 9100
+  contextPath: /search
+
+
+activemq:
+  broker-url: tcp://localhost:61616
+  queue:
+    renteCreated: rentes.q
