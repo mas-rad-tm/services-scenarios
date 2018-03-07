@@ -1,6 +1,6 @@
 package ch.globaz.tmmas.rentesservice.application.service;
 
-import ch.globaz.tmmas.rentesservice.application.api.dto.PersonnesPhysiqueDto;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.PersonnesPhysiqueDto;
 import ch.globaz.tmmas.rentesservice.domain.model.PersonnePhysique;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.ResponseEntity;

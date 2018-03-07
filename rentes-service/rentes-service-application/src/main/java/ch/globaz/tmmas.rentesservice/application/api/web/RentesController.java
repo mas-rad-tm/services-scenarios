@@ -1,8 +1,8 @@
 package ch.globaz.tmmas.rentesservice.application.api.web;
 
-import ch.globaz.tmmas.rentesservice.application.api.dto.PersonnesPhysiqueDto;
-import ch.globaz.tmmas.rentesservice.application.api.dto.RenteDto;
-import ch.globaz.tmmas.rentesservice.application.api.dto.RenteEtendueDto;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.PersonnesPhysiqueDto;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.RenteDto;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.RenteEtendueDto;
 import ch.globaz.tmmas.rentesservice.application.service.FeignPersonnesPhysiqueService;
 import ch.globaz.tmmas.rentesservice.application.service.RenteService;
 import ch.globaz.tmmas.rentesservice.domain.model.Rente;

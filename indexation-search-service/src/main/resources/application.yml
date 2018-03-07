@@ -9,6 +9,6 @@ activemq:
     renteCreated: rentes.q
 
 elasticsearch:
-  clustername: docker-cluster
+  clustername: elasticsearch
   host: localhost
   port: 9300

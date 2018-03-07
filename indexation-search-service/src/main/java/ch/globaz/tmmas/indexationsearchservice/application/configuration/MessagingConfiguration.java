@@ -1,23 +1,13 @@
 package ch.globaz.tmmas.indexationsearchservice.application.configuration;
 
-import ch.globaz.tmmas.indexationsearchservice.infrastructure.jms.JMSListener;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.jms.IndexationListener;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.RedeliveryPolicy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
-import org.springframework.jms.config.JmsListenerContainerFactory;
-import org.springframework.jms.listener.DefaultMessageListenerContainer;
-import org.springframework.stereotype.Service;
-import org.springframework.util.ErrorHandler;
-
-import javax.jms.ConnectionFactory;
-import javax.jms.Session;
 
 @Configuration
 @EnableJms
@@ -46,6 +36,9 @@ public class MessagingConfiguration {
         return policy;
     }
 
+
+
+
     @Bean
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
@@ -60,8 +53,8 @@ public class MessagingConfiguration {
 
 
     @Bean
-    public JMSListener jmsListener() {
-        return new JMSListener();
+    public IndexationListener jmsListener() {
+        return new IndexationListener();
     }
 
 

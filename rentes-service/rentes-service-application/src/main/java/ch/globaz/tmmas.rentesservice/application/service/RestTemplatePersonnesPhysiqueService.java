@@ -1,6 +1,6 @@
 package ch.globaz.tmmas.rentesservice.application.service;
 
-import ch.globaz.tmmas.rentesservice.application.api.dto.PersonnesPhysiqueDto;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.PersonnesPhysiqueDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;

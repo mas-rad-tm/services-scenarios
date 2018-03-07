@@ -1,17 +1,18 @@
 package ch.globaz.tmmas.indexationsearchservice.application.configuration;
 
+
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.node.NodeBuilder;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -35,6 +36,8 @@ public class ElasticSearchConfiguration {
         return new NodeBuilder();
     }
 
+
+
     @Bean
     public Client client() throws UnknownHostException {
 
@@ -56,4 +59,5 @@ public class ElasticSearchConfiguration {
     public ElasticsearchOperations elasticsearchTemplate() throws Exception {
         return new ElasticsearchTemplate(client());
     }
+
 }

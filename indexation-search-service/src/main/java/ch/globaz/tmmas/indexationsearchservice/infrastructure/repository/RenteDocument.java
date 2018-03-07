@@ -1,6 +1,7 @@
-package ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models;
+package ch.globaz.tmmas.indexationsearchservice.infrastructure.repository;
 
 
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.RenteDto;
 import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.localdate.LocalDateDeserializer;
 import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.localdate.LocalDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -8,16 +9,16 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
-public class RenteDto {
+@Document(indexName = "rente", type = "avs")
+public class RenteDocument {
 
 
 	private String numero;
 	private Long requerantId;
+	@Id
 	private Long id;
 
 	@JsonDeserialize(using = LocalDateDeserializer.class)
@@ -25,11 +26,12 @@ public class RenteDto {
 	private LocalDate dateEnregistrement;
 
 
-	public RenteDto(){}
+	public RenteDocument(){}
 
 
-	private RenteDto(Long id,String numero, Long requerantId, String dateEnregistrement){
+	public RenteDocument(Long id,String numero, Long requerantId, String dateEnregistrement){
 
+		this.id = id;
 		this.numero = numero;
 		this.requerantId = requerantId;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -42,10 +44,6 @@ public class RenteDto {
 		return numero;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
 	public LocalDate getDateEnregistrement() {
 		return dateEnregistrement;
 	}
@@ -55,4 +53,11 @@ public class RenteDto {
 	}
 
 
+	public static RenteDocument fromDto(RenteDto renteDto){
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+		return new RenteDocument(renteDto.getId(),renteDto.getNumero(), renteDto.getRequerantId(), renteDto
+				.getDateEnregistrement()
+				.format(formatter));
+	}
 }

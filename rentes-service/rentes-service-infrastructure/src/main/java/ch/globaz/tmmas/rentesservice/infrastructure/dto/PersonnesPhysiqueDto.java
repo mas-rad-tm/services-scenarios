@@ -1,8 +1,8 @@
-package ch.globaz.tmmas.rentesservice.application.api.dto;
+package ch.globaz.tmmas.rentesservice.infrastructure.dto;
 
 
-import ch.globaz.tmmas.rentesservice.application.api.dto.localdate.LocalDateDeserializer;
-import ch.globaz.tmmas.rentesservice.application.api.dto.localdate.LocalDateSerializer;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.localdate.LocalDateDeserializer;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.localdate.LocalDateSerializer;
 import ch.globaz.tmmas.rentesservice.domain.model.PersonnePhysique;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

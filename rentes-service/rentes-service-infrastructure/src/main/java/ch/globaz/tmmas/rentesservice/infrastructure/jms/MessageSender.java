@@ -1,6 +1,8 @@
 package ch.globaz.tmmas.rentesservice.infrastructure.jms;
 
 
+import ch.globaz.tmmas.rentesservice.domain.model.Rente;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.RenteDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,9 @@ public class MessageSender {
 
     public void sendMessage(final String msg) {
 
-        jmsTemplate.send(new MessageCreator(){
+
+
+       jmsTemplate.send(new MessageCreator(){
             @Override
             public Message createMessage(Session session) throws JMSException {
                 ObjectMessage objectMessage = session.createObjectMessage(msg);

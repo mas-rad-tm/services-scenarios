@@ -1,7 +1,7 @@
-package ch.globaz.tmmas.rentesservice.application.api.dto;
+package ch.globaz.tmmas.rentesservice.infrastructure.dto;
 
-import ch.globaz.tmmas.rentesservice.application.api.dto.localdate.LocalDateDeserializer;
-import ch.globaz.tmmas.rentesservice.application.api.dto.localdate.LocalDateSerializer;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.localdate.LocalDateDeserializer;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.localdate.LocalDateSerializer;
 import ch.globaz.tmmas.rentesservice.domain.model.Rente;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -15,6 +15,7 @@ public class RenteDto {
 
 	private String numero;
 	private Long requerantId;
+	private Long id;
 
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)
@@ -24,8 +25,8 @@ public class RenteDto {
 	public RenteDto(){}
 
 
-	private RenteDto(String numero, Long requerantId, String dateEnregistrement){
-
+	private RenteDto(Long id,String numero, Long requerantId, String dateEnregistrement){
+		this.id = id;
 		this.numero = numero;
 		this.requerantId = requerantId;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -46,9 +47,14 @@ public class RenteDto {
 		return requerantId;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	public static RenteDto fromEntity(Rente rente){
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		return new RenteDto(rente.numero(), rente.requerantId(), rente.dateEnregistrement().format(formatter));
+		return new RenteDto(rente.id(),rente.numero(), rente.requerantId(), rente.dateEnregistrement().format
+				(formatter));
 	}
 }

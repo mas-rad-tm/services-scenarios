@@ -16,6 +16,10 @@ public class Rente {
         return numero;
     }
 
+    public Long id() {
+        return id;
+    }
+
     public Long requerantId () {
         return requerantId;
     }
