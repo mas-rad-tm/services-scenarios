@@ -8,7 +8,8 @@ server:
 spring:
   application:
     name:                                   config-server
-
+  profiles:
+      active:                               gitlab #default
 #####################################################################
 # Configuration Spring cloud
 #####################################################################

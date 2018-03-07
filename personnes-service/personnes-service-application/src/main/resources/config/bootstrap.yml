@@ -16,7 +16,7 @@ spring:
 #config branche
   cloud:
     config:
-      label:                                                 personnes-service
+      label:                                                 config-personnes-service
 
 # config uri
       uri:                                                   http://localhost:8100/config
@@ -24,19 +24,6 @@ spring:
 # url format : /{apname}/{profile}/{label}/{filename}
 logging:
   config:                                                    http://localhost:8100/config/personnes-service/default/personnes-service/logback-spring.xml
-
-
-  profiles:
-    active:             dev
-
-  application:
-    name:               personnes-service
-
-  cloud:
-    config:
-      label:            personnes-service
-      uri:              http://localhost:8100/config
-
 
 
 
