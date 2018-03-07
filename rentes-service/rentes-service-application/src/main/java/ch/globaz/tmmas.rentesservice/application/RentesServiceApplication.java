@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
  *
  */
 @Configuration
-@EnableDiscoveryClient
 @EnableAutoConfiguration(exclude = HibernateJpaAutoConfiguration.class)
 @ComponentScan(basePackages = "ch.globaz.tmmas.rentesservice")
 public class RentesServiceApplication {
