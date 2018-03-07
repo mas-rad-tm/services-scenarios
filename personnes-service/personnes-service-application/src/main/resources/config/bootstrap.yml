@@ -19,11 +19,15 @@ spring:
       uri:                                              http://localhost:8100/config
       # fail fast si pas config server
       failFast:                                         true
+logging:
+  # url format : /{apname}/{profile}/{label}/{filename}
+  config:               http://localhost:8100/config/personnes-service/default/personnes-service/logback-spring.xml
 
+### EUREKA DISCOVERY ####
 eureka:
   client:
     serviceUrl:
-      defaultZone:                                      http://localhost:8761/eureka/
+      defaultZone:                                      http://localhost:8300/eureka/
     registerWithEureka:                                 true
     fetchRegistry:                                      true
     healthcheck:
@@ -36,6 +40,3 @@ ribbon:
   eureka:
     enabled:                                             true
 
-logging:
-  # url format : /{apname}/{profile}/{label}/{filename}
-  config:               http://localhost:8100/config/personnes-service/default/personnes-service/logback-spring.xml

@@ -6,7 +6,7 @@ spring:
     name:                   eureka-discovery-server
 
 server:
-  port:                     8761
+  port:                     8300
 
 
 #désactivation auto-découverte

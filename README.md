@@ -1,3 +1,7 @@
+# Branche feat-discovery-server
+
+##Documentation
+* https://github.com/Netflix/eureka/wiki/Eureka-REST-operations
 
 
 #Spring profiles
@@ -13,7 +17,4 @@ intelij: gestion tomcat embraqué en debug
 
 jar: compilation jat (war par défaut)
 
-
-#eureka discovery url
-https://github.com/Netflix/eureka/wiki/Eureka-REST-operations
 

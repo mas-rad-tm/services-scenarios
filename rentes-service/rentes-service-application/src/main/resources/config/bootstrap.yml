@@ -26,3 +26,20 @@ spring:
 logging:
   # url format : /{apname}/{profile}/{label}/{filename}
   config:               http://localhost:8100/config/rentes-service/default/rentes-service/logback-spring.xml
+
+### EUREKA DISCOVERY ####
+eureka:
+  client:
+    serviceUrl:
+      defaultZone:                                      http://localhost:8300/eureka/
+    registerWithEureka:                                 true
+    fetchRegistry:                                      true
+    healthcheck:
+      enabled:                                          true
+  instance:
+    leaseRenewalIntervalInSeconds:                      1
+    leaseExpirationDurationInSeconds:                   2
+
+ribbon:
+  eureka:
+    enabled:                                             true
