@@ -181,11 +181,7 @@
 
 
 
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-eureka</artifactId>
-                &lt;!&ndash;<version>${spring-eureka-client.version}</version>&ndash;&gt;
-            </dependency>-->
+           
 
             <!-- ********************************* -->
             <!-- ******** Persistence ************ -->

@@ -1,0 +1,2 @@
+logging:
+  config:                                                    http://localhost:8100/config/personnes-service/default/personnes-service/logback-spring.xml
