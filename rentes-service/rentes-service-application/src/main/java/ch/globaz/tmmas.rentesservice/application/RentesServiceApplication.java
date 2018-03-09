@@ -29,11 +29,11 @@ import java.util.stream.Collectors;
  *
  */
 
-@Configuration
+@SpringBootApplication
 @EnableAutoConfiguration(exclude = HibernateJpaAutoConfiguration.class)
 @EnableDiscoveryClient
-@EnableFeignClients
-@ComponentScan(basePackages = "ch.globaz.tmmas.rentesservice")
+@EnableFeignClients(basePackages="ch.globaz.tmmas.rentesservice.infrastructure.service")
+@ComponentScan(basePackages = {"ch.globaz.tmmas.rentesservice"})
 public class RentesServiceApplication {
 
 

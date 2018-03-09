@@ -1,26 +1,35 @@
 package ch.globaz.tmmas.rentesservice.application.api.web;
 
-import ch.globaz.tmmas.rentesservice.application.api.dto.PersonnesPhysiqueDto;
-import ch.globaz.tmmas.rentesservice.application.api.dto.RenteDto;
-import ch.globaz.tmmas.rentesservice.application.api.dto.RenteEtendueDto;
-import ch.globaz.tmmas.rentesservice.application.service.FeignPersonnesPhysiqueService;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.PersonnesPhysiqueDto;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.RenteDto;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.RenteEtendueDto;
+import ch.globaz.tmmas.rentesservice.infrastructure.service.FeignPersonnesPhysiqueService;
 import ch.globaz.tmmas.rentesservice.application.service.RenteService;
 import ch.globaz.tmmas.rentesservice.domain.model.Rente;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.UriTemplate;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/rentes")
 public class RentesController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RentesController.class);
+
+	private static final String RENTES = "/rentes";
+	private static final String RENTE = RENTES + "/{id}";
 
 	@Autowired
 	RenteService renteService;
@@ -30,23 +39,35 @@ public class RentesController {
 
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity saveRente(@RequestBody RenteDto dto){
+	public ResponseEntity createRente(@RequestBody RenteDto dto){
 
 		LOGGER.debug("createRente(), {}",dto);
 
-		ResponseEntity<PersonnesPhysiqueDto> personne = personnePhysiqueService.getPersonnePhysiqueById(dto.getRequerantId());
+		ResponseEntity<PersonnesPhysiqueDto> personne
+                = personnePhysiqueService.getPersonnePhysiqueById(dto.getRequerantId());
 
 		if(personne.getStatusCode().equals(HttpStatus.NOT_FOUND)){
-			LOGGER.debug("createRente(), no person with this id: {}",dto.getRequerantId());
+
+		    LOGGER.debug("createRente(), no person with this id: {}",dto.getRequerantId());
 
 			return new ResponseEntity<String>("Tiers referenced not exist: " + dto.getRequerantId(), HttpStatus
 					.CONFLICT);
 		}else{
-			LOGGER.debug("createRente(), find personne : {}",personne.getBody());
 
-			Rente rente = renteService.sauve(Rente.builder(dto.getNumero(),Long.valueOf(dto.getRequerantId()),dto.getDateEnregistrement()));
+		    LOGGER.debug("createRente(), find personne : {}",personne.getBody());
 
-			return new ResponseEntity<>(RenteDto.fromEntity(rente), HttpStatus.CREATED);
+			Rente rente = renteService.sauve(Rente.builder(dto.getNumero(),
+					Long.valueOf(dto.getRequerantId()),
+					dto.getDateEnregistrement()));
+
+			RenteDto rdto = RenteDto.fromEntity(rente);
+
+			rdto.add(linkTo(methodOn(RentesController.class).getRenteById(rente.id())).withSelfRel());
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(new UriTemplate(RENTE).expand(rente.id()));
+
+
+			return new ResponseEntity<>(rdto, HttpStatus.CREATED);
 		}
 
 	}
@@ -56,15 +77,21 @@ public class RentesController {
 			                                            String etendu){
 		Boolean renteEtendu = Boolean.valueOf(etendu);
 
-		List<Rente> hws = renteService.getAll();
+		List<Rente> rentes = renteService.getAll();
 
 
 		if(renteEtendu){
-			List<RenteEtendueDto> rentesEtendues = getAllAsDto(hws).stream().map(rente -> {
+			List<RenteEtendueDto> rentesEtendues = getAllAsDto(rentes).stream().map(rente -> {
+
+				rente.add(linkTo(methodOn(RentesController.class)
+						.getRenteById(rente.getTechnicalId())).withSelfRel());
 
 				//recup pp dto
 				PersonnesPhysiqueDto ppDto =
 						personnePhysiqueService.getPersonnePhysiqueById(rente.getRequerantId()).getBody();
+
+				ppDto.add(linkTo(methodOn(FeignPersonnesPhysiqueService.class)
+						.getPersonnePhysiqueById(ppDto.getTechnicalId())).withSelfRel());
 
 				return new RenteEtendueDto(rente, ppDto);
 
@@ -74,7 +101,32 @@ public class RentesController {
 		}
 
 
-		return new ResponseEntity<>(getAllAsDto(hws), HttpStatus.OK);
+		return new ResponseEntity<>(getAllAsDto(rentes), HttpStatus.OK);
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/{personneId}")
+	public ResponseEntity getRenteById(@PathVariable Long personneId){
+
+		LOGGER.debug("getRenteById(), {}",personneId);
+
+		Optional<Rente> rente = renteService.getById(personneId);
+
+		if(rente.isPresent()){
+			RenteDto dto = RenteDto.fromEntity(rente.get());
+
+			dto.add(linkTo(methodOn(RentesController.class).getRenteById(rente.get().id())).withSelfRel());
+			HttpHeaders headers = new HttpHeaders();
+			headers.setLocation(new UriTemplate(RENTE).expand(rente.get().id()));
+
+
+			LOGGER.debug("getPersonById() return  {}",dto);
+
+			return new ResponseEntity<>(dto, HttpStatus.OK);
+		}else{
+
+			return new ResponseEntity<>("No entity found with id " + personneId, HttpStatus.NOT_FOUND);
+		}
+
 	}
 
 	private List<RenteDto> getAllAsDto (List<Rente> renteList) {

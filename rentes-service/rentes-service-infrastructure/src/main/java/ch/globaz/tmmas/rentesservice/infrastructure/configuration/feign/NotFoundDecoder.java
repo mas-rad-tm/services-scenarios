@@ -1,4 +1,4 @@
-package ch.globaz.tmmas.rentesservice.application.configuration.feign;
+package ch.globaz.tmmas.rentesservice.infrastructure.configuration.feign;
 
 import feign.FeignException;
 import feign.Response;

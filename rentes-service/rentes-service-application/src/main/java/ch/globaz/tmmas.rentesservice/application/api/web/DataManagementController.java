@@ -1,11 +1,11 @@
 package ch.globaz.tmmas.rentesservice.application.api.web;
 
 
-import ch.globaz.tmmas.rentesservice.application.api.dto.PersonnesPhysiqueDto;
-import ch.globaz.tmmas.rentesservice.application.api.dto.datamanagement.SampleDataDto;
-import ch.globaz.tmmas.rentesservice.application.service.FeignPersonnesPhysiqueService;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.PersonnesPhysiqueDto;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.datamanagement.SampleDataDto;
+import ch.globaz.tmmas.rentesservice.infrastructure.service.FeignPersonnesPhysiqueService;
 import ch.globaz.tmmas.rentesservice.application.service.RenteService;
-import ch.globaz.tmmas.rentesservice.application.service.RestTemplatePersonnesPhysiqueService;
+import ch.globaz.tmmas.rentesservice.infrastructure.service.RestTemplatePersonnesPhysiqueService;
 import ch.globaz.tmmas.rentesservice.domain.model.Rente;
 import com.github.javafaker.Faker;
 import org.slf4j.Logger;
@@ -37,7 +37,7 @@ public class DataManagementController {
 
 
     @Autowired
-    FeignPersonnesPhysiqueService personnePhysiqueService;
+    FeignPersonnesPhysiqueService feignPersonnePhysiqueService;
 
     @Autowired
     RestTemplatePersonnesPhysiqueService restTemplatePersonnesPhysiqueService;
@@ -55,7 +55,7 @@ public class DataManagementController {
         //récupération du nombre de valeurs à générer
         Integer nbRentesToGenerate = Integer.valueOf(dto.getNbValeurs());
         //récupérationd personnes physiques
-        List<PersonnesPhysiqueDto> personnesPhysiques  = personnePhysiqueService.getPersonnesPhysique().getBody();
+        List<PersonnesPhysiqueDto> personnesPhysiques  = feignPersonnePhysiqueService.getPersonnesPhysique().getBody();
         Integer nbOfPersonnesPhysique = personnesPhysiques.size();
 
         //plafin nbRentes a geerer
@@ -68,7 +68,7 @@ public class DataManagementController {
         //iteration sur les personnes, et generation des rentes
         personnesPhysiques.subList(0,nbRentesToGenereateEffective).stream().forEach(personne -> {
 
-            Rente rente = Rente.builder(getNumero(),personne.getId(),LocalDate.now());
+            Rente rente = Rente.builder(getNumero(),personne.getTechnicalId(),LocalDate.now());
 
             renteService.sauve(rente);
 
@@ -98,7 +98,7 @@ public class DataManagementController {
         //iteration sur les personnes, et generation des rentes
         personnesPhysiques.subList(0,nbRentesToGenereateEffective).stream().forEach(personne -> {
 
-            Rente rente = Rente.builder(getNumero(),personne.getId(),LocalDate.now());
+            Rente rente = Rente.builder(getNumero(),personne.getTechnicalId(),LocalDate.now());
 
             renteService.sauve(rente);
 

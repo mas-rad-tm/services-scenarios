@@ -21,6 +21,10 @@ public class Rente {
         return dateEnregistrement;
     }
 
+    public Long id() {
+        return id;
+    }
+
     public Rente(String numero, LocalDate dateEnregistrement, Long requerantId){
         this.requerantId = requerantId;
         this.dateEnregistrement = dateEnregistrement;

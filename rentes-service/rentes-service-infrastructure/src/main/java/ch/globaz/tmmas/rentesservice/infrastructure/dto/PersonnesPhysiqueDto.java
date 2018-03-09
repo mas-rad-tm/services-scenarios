@@ -1,18 +1,20 @@
-package ch.globaz.tmmas.rentesservice.application.api.dto;
+package ch.globaz.tmmas.rentesservice.infrastructure.dto;
 
 
-import ch.globaz.tmmas.rentesservice.application.api.dto.localdate.LocalDateDeserializer;
-import ch.globaz.tmmas.rentesservice.application.api.dto.localdate.LocalDateSerializer;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.localdate.LocalDateDeserializer;
+import ch.globaz.tmmas.rentesservice.infrastructure.dto.localdate.LocalDateSerializer;
 import ch.globaz.tmmas.rentesservice.domain.model.PersonnePhysique;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.ToString;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @ToString
-public class PersonnesPhysiqueDto {
+public class PersonnesPhysiqueDto extends ResourceSupport{
 
 	private String nom;
 	private String prenom;
@@ -23,7 +25,9 @@ public class PersonnesPhysiqueDto {
 
 	private String nss;
 
-	private Long id;
+
+	@JsonProperty("id")
+	private Long technicalId;
 
 
 	public PersonnesPhysiqueDto(){}
@@ -37,7 +41,7 @@ public class PersonnesPhysiqueDto {
 
 		this.dateNaissance = LocalDate.parse(dateNaissance,formatter);
 		this.nss = nss;
-		this.id = id;
+		this.technicalId = id;
 	}
 
 
@@ -57,8 +61,8 @@ public class PersonnesPhysiqueDto {
 		return nss;
 	}
 
-	public Long getId(){
-		return id;
+	public Long getTechnicalId(){
+		return technicalId;
 	}
 
 	public static PersonnesPhysiqueDto fromEntity(PersonnePhysique pp){

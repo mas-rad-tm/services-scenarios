@@ -1,7 +1,9 @@
-package ch.globaz.tmmas.rentesservice.application.api.dto;
+package ch.globaz.tmmas.rentesservice.infrastructure.dto;
 
 
-public class RenteEtendueDto {
+import org.springframework.hateoas.ResourceSupport;
+
+public class RenteEtendueDto extends ResourceSupport{
 
 	private RenteDto rente;
 	private PersonnesPhysiqueDto personne;

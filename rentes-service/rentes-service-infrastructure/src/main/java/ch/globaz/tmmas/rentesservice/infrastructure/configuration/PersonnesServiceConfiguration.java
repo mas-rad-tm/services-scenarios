@@ -1,7 +1,7 @@
-package ch.globaz.tmmas.rentesservice.application.configuration;
+package ch.globaz.tmmas.rentesservice.infrastructure.configuration;
 
 
-import ch.globaz.tmmas.rentesservice.application.configuration.feign.NotFoundDecoder;
+import ch.globaz.tmmas.rentesservice.infrastructure.configuration.feign.NotFoundDecoder;
 import feign.codec.Decoder;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
