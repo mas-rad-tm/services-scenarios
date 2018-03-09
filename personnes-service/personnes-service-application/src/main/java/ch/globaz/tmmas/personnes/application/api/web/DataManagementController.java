@@ -3,6 +3,7 @@ package ch.globaz.tmmas.personnes.application.api.web;
 import ch.globaz.tmmas.personnes.application.api.dto.PersonnesPhysiqueDto;
 import ch.globaz.tmmas.personnes.application.api.dto.datamanagement.SampleDataDto;
 import ch.globaz.tmmas.personnes.application.service.PersonnePhysiqueService;
+import ch.globaz.tmmas.personnes.domain.model.NSS;
 import ch.globaz.tmmas.personnes.domain.model.PersonnePhysique;
 import com.github.javafaker.Faker;
 import org.slf4j.Logger;
@@ -43,7 +44,7 @@ public class DataManagementController {
         Integer nbElements = Integer.valueOf(dto.getNbValeurs());
 
         IntStream.range(0,nbElements).forEach(iteration -> {
-            personneService.sauve(PersonnePhysique.builder(getNom(),getPrenom(),getDateNaissance(),getNss()));
+            personneService.sauve(PersonnePhysique.builder(getNom(),getPrenom(),getDateNaissance(),new NSS(getNss())));
         });
 
         LOGGER.debug("sample personns create, {} elements inserted",nbElements);

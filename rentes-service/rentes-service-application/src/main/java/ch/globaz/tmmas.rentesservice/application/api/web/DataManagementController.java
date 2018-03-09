@@ -55,7 +55,7 @@ public class DataManagementController {
         //récupération du nombre de valeurs à générer
         Integer nbRentesToGenerate = Integer.valueOf(dto.getNbValeurs());
         //récupérationd personnes physiques
-        List<PersonnesPhysiqueDto> personnesPhysiques  = personnePhysiqueService.getPersonnesPhysique();
+        List<PersonnesPhysiqueDto> personnesPhysiques  = personnePhysiqueService.getPersonnesPhysique().getBody();
         Integer nbOfPersonnesPhysique = personnesPhysiques.size();
 
         //plafin nbRentes a geerer

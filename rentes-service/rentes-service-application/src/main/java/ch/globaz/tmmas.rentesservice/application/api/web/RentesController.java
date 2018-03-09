@@ -34,6 +34,10 @@ public class RentesController {
 
 		LOGGER.debug("createRente(), {}",dto);
 
+		ResponseEntity<PersonnesPhysiqueDto> personne = personnePhysiqueService.getPersonnePhysiqueById(dto.getRequerantId());
+
+		LOGGER.debug("createRente(), find personne existence: {}",personne);
+
 		Rente rente = renteService.sauve(Rente.builder(dto.getNumero(),Long.valueOf(dto.getRequerantId()),dto.getDateEnregistrement()));
 
 		return new ResponseEntity<>(RenteDto.fromEntity(rente), HttpStatus.CREATED);
@@ -52,7 +56,7 @@ public class RentesController {
 
 				//recup pp dto
 				PersonnesPhysiqueDto ppDto =
-						personnePhysiqueService.getPersonnePhysiqueById(rente.getRequerantId());
+						personnePhysiqueService.getPersonnePhysiqueById(rente.getRequerantId()).getBody();
 
 				return new RenteEtendueDto(rente, ppDto);
 

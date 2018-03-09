@@ -28,7 +28,7 @@ public class PersonnesPhysiqueDto {
 	public PersonnesPhysiqueDto(){}
 
 
-	private PersonnesPhysiqueDto(Long id,String nom, String prenom, String dateNaissance, String nss){
+	private PersonnesPhysiqueDto(String nom, String prenom, String dateNaissance, String nss){
 
 		this.nom = nom;
 		this.prenom = prenom;
@@ -63,7 +63,7 @@ public class PersonnesPhysiqueDto {
 	public static PersonnesPhysiqueDto fromEntity(PersonnePhysique pp){
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		return new PersonnesPhysiqueDto(pp.getId(),pp.nom(), pp.prenom(), pp.dateNaissance().format(formatter), pp
-				.getNss());
+		return new PersonnesPhysiqueDto(pp.nom(), pp.prenom(), pp.dateNaissance().format(formatter), pp
+				.nss().nss());
 	}
 }
