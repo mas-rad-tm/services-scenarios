@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by seb on .
@@ -21,6 +22,7 @@ public class PersonnePhysiqueServiceImpl implements PersonnePhysiqueService {
 
     @Override
     public PersonnePhysique sauve(PersonnePhysique pp) {
+
         return repository.store(pp);
     }
 
@@ -35,7 +37,10 @@ public class PersonnePhysiqueServiceImpl implements PersonnePhysiqueService {
     }
 
     @Override
-    public PersonnePhysique getById(Long id) {
-        return repository.getById(id);
+    public Optional getById(Long id) {
+
+        Optional<PersonnePhysique> pp = repository.getById(id);
+
+        return pp;
     }
 }

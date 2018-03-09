@@ -3,6 +3,7 @@ package ch.globaz.tmmas.personnes.domain.model;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 /**
  * Created by seb on .
@@ -15,20 +16,23 @@ public class PersonnePhysique {
     private String nom;
     private String prenom;
     private LocalDate dateNaissance;
-    private String nss;
+    private NSS nss;
+    private PersonnePhysiqueId identifiant;
 
-    private PersonnePhysique(String nom, String prenom, LocalDate dateNaissance, String nss) {
+    private PersonnePhysique(String nom, String prenom, LocalDate dateNaissance, NSS nss) {
         this.nom = nom;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;
         this.nss = nss;
+        this.identifiant = new PersonnePhysiqueId(UUID.randomUUID().toString());
     }
 
-    public PersonnePhysique(Long id,String nom, String prenom, LocalDate dateNaissance, String nss) {
+   public PersonnePhysique(Long id,String nom, String prenom, LocalDate dateNaissance, NSS nss) {
         this.nom = nom;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;
         this.nss = nss;
+        this.identifiant = new PersonnePhysiqueId(UUID.randomUUID().toString());
         this.id = id;
     }
 
@@ -44,15 +48,23 @@ public class PersonnePhysique {
         return dateNaissance;
     }
 
-    public String getNss () {
+    public NSS nss () {
         return nss;
     }
 
-    public Long getId () {
+    public Long id() {
         return id;
     }
 
-    public static PersonnePhysique builder(String nom, String prenom, LocalDate dateNaissance, String nss) {
+    public PersonnePhysiqueId identifiant () {
+        return identifiant;
+    }
+
+    public Long getId () {
+       return id;
+    }
+
+    public static PersonnePhysique builder(String nom, String prenom, LocalDate dateNaissance, NSS nss) {
         return new PersonnePhysique(nom,prenom,dateNaissance,nss);
     }
 

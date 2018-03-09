@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class RenteServiceImpl implements RenteService {
@@ -23,5 +24,13 @@ public class RenteServiceImpl implements RenteService {
 	@Override
 	public List<Rente> getAll() {
 		return repository.getAll();
+	}
+
+	@Override
+	public Optional getById(Long id) {
+
+		Optional<Rente> pp = repository.getById(id);
+
+		return pp;
 	}
 }

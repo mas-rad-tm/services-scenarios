@@ -18,8 +18,11 @@ public class PersonnePhysiqueTest {
     public void assertThatDAteAsStringCoorectImplments() {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+        NSS nss = NSSBuilder.aleatoire();
+
         PersonnePhysique pp = PersonnePhysique.builder("Seb","Chevre", LocalDate.parse("11.09.1978",formatter),
-                "765.1234.5678.90");
+                nss);
 
         assertTrue(pp != null);
 
