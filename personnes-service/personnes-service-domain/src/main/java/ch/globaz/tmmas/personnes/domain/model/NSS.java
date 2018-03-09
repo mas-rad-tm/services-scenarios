@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode
 public class NSS implements ValueObject<NSS>{
 
+    NSS () {}
+
     @NotNull(message = "le nss ne peut pas être null")
     private String nss;
 

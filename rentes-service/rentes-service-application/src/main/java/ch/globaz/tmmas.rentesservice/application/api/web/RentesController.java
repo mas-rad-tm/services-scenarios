@@ -30,17 +30,25 @@ public class RentesController {
 
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<RenteDto> saveRente(@RequestBody RenteDto dto){
+	public ResponseEntity saveRente(@RequestBody RenteDto dto){
 
 		LOGGER.debug("createRente(), {}",dto);
 
 		ResponseEntity<PersonnesPhysiqueDto> personne = personnePhysiqueService.getPersonnePhysiqueById(dto.getRequerantId());
 
-		LOGGER.debug("createRente(), find personne existence: {}",personne);
+		if(personne.getStatusCode().equals(HttpStatus.NOT_FOUND)){
+			LOGGER.debug("createRente(), no person with this id: {}",dto.getRequerantId());
 
-		Rente rente = renteService.sauve(Rente.builder(dto.getNumero(),Long.valueOf(dto.getRequerantId()),dto.getDateEnregistrement()));
+			return new ResponseEntity<String>("Tiers referenced not exist: " + dto.getRequerantId(), HttpStatus
+					.CONFLICT);
+		}else{
+			LOGGER.debug("createRente(), find personne : {}",personne.getBody());
 
-		return new ResponseEntity<>(RenteDto.fromEntity(rente), HttpStatus.CREATED);
+			Rente rente = renteService.sauve(Rente.builder(dto.getNumero(),Long.valueOf(dto.getRequerantId()),dto.getDateEnregistrement()));
+
+			return new ResponseEntity<>(RenteDto.fromEntity(rente), HttpStatus.CREATED);
+		}
+
 	}
 
 	@RequestMapping(method = RequestMethod.GET)

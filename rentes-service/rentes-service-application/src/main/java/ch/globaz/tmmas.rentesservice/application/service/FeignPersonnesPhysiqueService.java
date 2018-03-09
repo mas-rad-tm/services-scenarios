@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 
-@FeignClient("personnes-service")
+@FeignClient(decode404 = true,value = "personnes-service")
 public interface FeignPersonnesPhysiqueService {
 
+	@LoadBalanced
 	@RequestMapping(method = RequestMethod.GET, value = "/personnes-service/personnes/{personnesId}")
 	ResponseEntity<PersonnesPhysiqueDto> getPersonnePhysiqueById(@PathVariable("personnesId") Long tiersId);
 

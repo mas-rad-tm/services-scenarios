@@ -13,5 +13,5 @@ public interface PersonnePhysiqueService {
 
 	Long countPersonnePhysique();
 
-	Optional<PersonnePhysique> getById(Long id);
+	Optional getById(Long id);
 }

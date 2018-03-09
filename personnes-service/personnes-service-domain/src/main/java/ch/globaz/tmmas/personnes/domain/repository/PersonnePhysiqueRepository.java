@@ -3,6 +3,7 @@ package ch.globaz.tmmas.personnes.domain.repository;
 import ch.globaz.tmmas.personnes.domain.model.PersonnePhysique;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PersonnePhysiqueRepository {
 
@@ -12,5 +13,5 @@ public interface PersonnePhysiqueRepository {
 
 	Long countAllTiers();
 
-	PersonnePhysique getById(Long personneId);
+	Optional<PersonnePhysique> getById(Long personneId);
 }

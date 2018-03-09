@@ -22,6 +22,7 @@ public class PersonnePhysiqueServiceImpl implements PersonnePhysiqueService {
 
     @Override
     public PersonnePhysique sauve(PersonnePhysique pp) {
+
         return repository.store(pp);
     }
 
@@ -36,7 +37,10 @@ public class PersonnePhysiqueServiceImpl implements PersonnePhysiqueService {
     }
 
     @Override
-    public Optional<PersonnePhysique> getById(Long id) {
-        return Optional.ofNullable(repository.getById(id));
+    public Optional getById(Long id) {
+
+        Optional<PersonnePhysique> pp = repository.getById(id);
+
+        return pp;
     }
 }

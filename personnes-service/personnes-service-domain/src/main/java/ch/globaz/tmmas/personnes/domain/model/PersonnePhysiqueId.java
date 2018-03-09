@@ -28,4 +28,6 @@ public class PersonnePhysiqueId implements ValueObject<PersonnePhysiqueId>{
     public boolean sameValueAs(PersonnePhysiqueId other) {
         return this.equals(other);
     }
+
+    PersonnePhysiqueId(){}
 }
