@@ -5,6 +5,7 @@ import ch.globaz.tmmas.rentesservice.infrastructure.dto.PersonnesPhysiqueDto;
 import ch.globaz.tmmas.rentesservice.domain.model.PersonnePhysique;
 import ch.globaz.tmmas.rentesservice.infrastructure.dto.PersonnesPhysiqueDto;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;

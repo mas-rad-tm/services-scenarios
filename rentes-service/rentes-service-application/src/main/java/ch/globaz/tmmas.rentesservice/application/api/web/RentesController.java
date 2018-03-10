@@ -4,10 +4,6 @@ import ch.globaz.tmmas.rentesservice.infrastructure.dto.PersonnesPhysiqueDto;
 import ch.globaz.tmmas.rentesservice.infrastructure.dto.RenteDto;
 import ch.globaz.tmmas.rentesservice.infrastructure.dto.RenteEtendueDto;
 import ch.globaz.tmmas.rentesservice.infrastructure.service.FeignPersonnesPhysiqueService;
-import ch.globaz.tmmas.rentesservice.infrastructure.dto.PersonnesPhysiqueDto;
-import ch.globaz.tmmas.rentesservice.infrastructure.dto.RenteDto;
-import ch.globaz.tmmas.rentesservice.infrastructure.dto.RenteEtendueDto;
-import ch.globaz.tmmas.rentesservice.application.service.FeignPersonnesPhysiqueService;
 import ch.globaz.tmmas.rentesservice.application.service.RenteService;
 import ch.globaz.tmmas.rentesservice.domain.model.Rente;
 import org.slf4j.Logger;
@@ -66,9 +62,9 @@ public class RentesController {
 
 			RenteDto rdto = RenteDto.fromEntity(rente);
 
-			rdto.add(linkTo(methodOn(RentesController.class).getRenteById(rente.id())).withSelfRel());
+			rdto.add(linkTo(methodOn(RentesController.class).getRenteById(rdto.getTechnicalId())).withSelfRel());
 			HttpHeaders headers = new HttpHeaders();
-			headers.setLocation(new UriTemplate(RENTE).expand(rente.id()));
+			headers.setLocation(new UriTemplate(RENTE).expand(rdto.getTechnicalId()));
 
 
 			return new ResponseEntity<>(rdto, HttpStatus.CREATED);
@@ -118,9 +114,9 @@ public class RentesController {
 		if(rente.isPresent()){
 			RenteDto dto = RenteDto.fromEntity(rente.get());
 
-			dto.add(linkTo(methodOn(RentesController.class).getRenteById(rente.get().id())).withSelfRel());
+			dto.add(linkTo(methodOn(RentesController.class).getRenteById(dto.getTechnicalId())).withSelfRel());
 			HttpHeaders headers = new HttpHeaders();
-			headers.setLocation(new UriTemplate(RENTE).expand(rente.get().id()));
+			headers.setLocation(new UriTemplate(RENTE).expand(dto.getTechnicalId()));
 
 
 			LOGGER.debug("getPersonById() return  {}",dto);
