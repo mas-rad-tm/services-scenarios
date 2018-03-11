@@ -1,12 +1,14 @@
 package ch.globaz.tmmas.rentesservice.infrastructure.dto;
 
 
+import ch.globaz.tmmas.rentesservice.domain.model.DossierStatus;
+
 import ch.globaz.tmmas.rentesservice.infrastructure.dto.localdate.LocalDateDeserializer;
 import ch.globaz.tmmas.rentesservice.infrastructure.dto.localdate.LocalDateSerializer;
-import ch.globaz.tmmas.rentesservice.domain.model.PersonnePhysique;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Getter;
 import lombok.ToString;
 import org.springframework.hateoas.ResourceSupport;
 
@@ -14,6 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @ToString
+@Getter
 public class PersonnesPhysiqueDto extends ResourceSupport{
 
 	private String nom;
@@ -24,6 +27,8 @@ public class PersonnesPhysiqueDto extends ResourceSupport{
 	private LocalDate dateNaissance;
 
 	private String nss;
+
+	private DossierStatus status;
 
 
 	@JsonProperty("id")
@@ -45,30 +50,6 @@ public class PersonnesPhysiqueDto extends ResourceSupport{
 	}
 
 
-	public String getNom() {
-		return nom;
-	}
 
-	public LocalDate getDateNaissance() {
-		return dateNaissance;
-	}
 
-	public String getPrenom () {
-		return prenom;
-	}
-
-	public String getNss () {
-		return nss;
-	}
-
-	public Long getTechnicalId(){
-		return technicalId;
-	}
-
-	public static PersonnesPhysiqueDto fromEntity(PersonnePhysique pp){
-
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		return new PersonnesPhysiqueDto(pp.getId(),pp.nom(), pp.prenom(), pp.dateNaissance().format(formatter), pp
-				.getNss());
-	}
 }

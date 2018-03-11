@@ -1,12 +1,12 @@
 package ch.globaz.tmmas.rentesservice.application.api.web;
 
 
+import ch.globaz.tmmas.rentesservice.application.service.DossierService;
+import ch.globaz.tmmas.rentesservice.domain.model.Dossier;
 import ch.globaz.tmmas.rentesservice.infrastructure.dto.PersonnesPhysiqueDto;
 import ch.globaz.tmmas.rentesservice.infrastructure.dto.datamanagement.SampleDataDto;
 import ch.globaz.tmmas.rentesservice.infrastructure.service.FeignPersonnesPhysiqueService;
-import ch.globaz.tmmas.rentesservice.application.service.RenteService;
 import ch.globaz.tmmas.rentesservice.infrastructure.service.RestTemplatePersonnesPhysiqueService;
-import ch.globaz.tmmas.rentesservice.domain.model.Rente;
 import com.github.javafaker.Faker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public class DataManagementController {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataManagementController.class);
 
     @Autowired
-    RenteService renteService;
+    DossierService dossierService;
 
 
     @Autowired
@@ -68,9 +68,9 @@ public class DataManagementController {
         //iteration sur les personnes, et generation des rentes
         personnesPhysiques.subList(0,nbRentesToGenereateEffective).stream().forEach(personne -> {
 
-            Rente rente = Rente.builder(getNumero(),personne.getTechnicalId(),LocalDate.now());
+            Dossier dossier = Dossier.builder(personne.getTechnicalId(),LocalDate.now());
 
-            renteService.sauve(rente);
+            dossierService.sauve(dossier);
 
         });
 
@@ -98,9 +98,9 @@ public class DataManagementController {
         //iteration sur les personnes, et generation des rentes
         personnesPhysiques.subList(0,nbRentesToGenereateEffective).stream().forEach(personne -> {
 
-            Rente rente = Rente.builder(getNumero(),personne.getTechnicalId(),LocalDate.now());
+            Dossier dossier = Dossier.builder(personne.getTechnicalId(),LocalDate.now());
 
-            renteService.sauve(rente);
+            dossierService.sauve(dossier);
 
         });
 

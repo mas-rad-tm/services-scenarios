@@ -26,9 +26,9 @@ zuul:
 
   prefix: /api/v1
   routes:
-    rentes:
-      path: /rentes/**
-      serviceId: rentes-service
+    dossiers:
+      path: /dossiers/**
+      serviceId: dossiers-service
       stripPrefix: true
       retryable: true
 

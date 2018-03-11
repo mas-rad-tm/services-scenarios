@@ -7,7 +7,7 @@
 
     <!-- ****** artifact description ****** -->
     <groupId>ch.globaz.tmmas</groupId>
-    <artifactId>rentes-service</artifactId>
+    <artifactId>dossiers-service</artifactId>
     <packaging>pom</packaging>
     <description>Module parent pour le backend de référence</description>
     <version>1.0.0-SNAPSHOT</version>
@@ -78,19 +78,19 @@
             <!-- ********************************* -->
             <dependency>
                 <groupId>ch.globaz.tmmas</groupId>
-                <artifactId>rentes-service-application</artifactId>
+                <artifactId>dossiers-service-application</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>ch.globaz.tmmas</groupId>
-                <artifactId>rentes-service-domain</artifactId>
+                <artifactId>dossiers-service-domain</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>ch.globaz.tmmas</groupId>
-                <artifactId>rentes-service-infrastructure</artifactId>
+                <artifactId>dossiers-service-infrastructure</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
 

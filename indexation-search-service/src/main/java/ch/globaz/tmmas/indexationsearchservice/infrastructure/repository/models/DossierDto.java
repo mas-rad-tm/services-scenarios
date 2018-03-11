@@ -1,30 +1,34 @@
-package ch.globaz.tmmas.zuulapigateway.application.dto;
+package ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models;
 
 
-import ch.globaz.tmmas.zuulapigateway.application.dto.localdate.LocalDateDeserializer;
-import ch.globaz.tmmas.zuulapigateway.application.dto.localdate.LocalDateSerializer;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.localdate.LocalDateDeserializer;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.localdate.LocalDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@ToString
-public class RenteDto {
+
+public class DossierDto {
+
 
 	private String numero;
 	private Long requerantId;
+	private Long id;
 
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate dateEnregistrement;
 
 
-	public RenteDto(){}
+	public DossierDto(){}
 
 
-	private RenteDto(String numero, Long requerantId, String dateEnregistrement){
+	private DossierDto(Long id, String numero, Long requerantId, String dateEnregistrement){
 
 		this.numero = numero;
 		this.requerantId = requerantId;
@@ -38,18 +42,16 @@ public class RenteDto {
 		return numero;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	public LocalDate getDateEnregistrement() {
 		return dateEnregistrement;
 	}
 
 	public Long getRequerantId () {
 		return requerantId;
-	}
-
-	public static RenteDto from(String numero, Long requerantId, String dateEnregistrement) {
-
-		return new RenteDto(numero,requerantId,dateEnregistrement);
-
 	}
 
 

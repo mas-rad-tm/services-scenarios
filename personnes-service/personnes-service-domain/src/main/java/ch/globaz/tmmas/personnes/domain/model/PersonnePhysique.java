@@ -1,5 +1,6 @@
 package ch.globaz.tmmas.personnes.domain.model;
 
+import ch.globaz.tmmas.personnes.domain.Entity;
 import lombok.ToString;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.UUID;
  * ${VERSION}
  */
 @ToString
-public class PersonnePhysique {
+public class PersonnePhysique implements Entity<PersonnePhysique>{
 
     private String nom;
     private String prenom;
@@ -24,7 +25,7 @@ public class PersonnePhysique {
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;
         this.nss = nss;
-        this.identifiant = new PersonnePhysiqueId(UUID.randomUUID().toString());
+        this.identifiant = PersonnePhysiqueId.aleatoire();
     }
 
    public PersonnePhysique(Long id,String nom, String prenom, LocalDate dateNaissance, NSS nss) {
@@ -32,7 +33,7 @@ public class PersonnePhysique {
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;
         this.nss = nss;
-        this.identifiant = new PersonnePhysiqueId(UUID.randomUUID().toString());
+        this.identifiant = PersonnePhysiqueId.aleatoire();
         this.id = id;
     }
 
@@ -72,4 +73,9 @@ public class PersonnePhysique {
     private Long id;
 
     PersonnePhysique(){}
+
+    @Override
+    public boolean sameIdentityAs(PersonnePhysique other) {
+        return identifiant.equals(other.identifiant());
+    }
 }

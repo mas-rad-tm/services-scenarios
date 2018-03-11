@@ -1,8 +1,8 @@
 package ch.globaz.tmmas.indexationsearchservice.infrastructure.jms;
 
 import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.IndexRepository;
-import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.RenteDocument;
-import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.RenteDto;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.DossierDocument;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.DossierDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +32,9 @@ public class IndexationListener {
 
         try {
 
-            RenteDto dto = mapper.readValue(rente,RenteDto.class);
+            DossierDto dto = mapper.readValue(rente,DossierDto.class);
 
-            indexRepository.save(RenteDocument.fromDto(dto));
+            indexRepository.save(DossierDocument.fromDto(dto));
 
             LOGGER.info("Successfully indexed'{}'", rente);
         } catch (IOException e) {

@@ -5,14 +5,14 @@
 
     <parent>
         <groupId>ch.globaz.tmmas</groupId>
-        <artifactId>rentes-service</artifactId>
+        <artifactId>dossiers-service</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <!-- ****** artifact description ****** -->
-    <artifactId>rentes-service-application</artifactId>
-    <name>rentes-service-application</name>
+    <artifactId>dossiers-service-application</artifactId>
+    <name>dossiers-service-application</name>
     <description>Module application pour l'application AVS4. Contient les services et les API</description>
     <packaging>${application.packaging.type}</packaging>
 
@@ -74,12 +74,12 @@
         <!-- application -->
         <dependency>
             <groupId>ch.globaz.tmmas</groupId>
-            <artifactId>rentes-service-domain</artifactId>
+            <artifactId>dossiers-service-domain</artifactId>
         </dependency>
 
        <dependency>
             <groupId>ch.globaz.tmmas</groupId>
-            <artifactId>rentes-service-infrastructure</artifactId>
+            <artifactId>dossiers-service-infrastructure</artifactId>
        </dependency>
 
         <!-- spring web starter transverse pour application et infrastructure -->

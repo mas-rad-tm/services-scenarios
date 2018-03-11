@@ -90,5 +90,5 @@ atlassian-ide-plugin.xml
 
 
 config-server/src/test/
-rentes-service/rentes-service-application/src/main/resources/config/
-rentes-service-application/src/main/resources/config/
+dossiers-service/dossiers-service-application/src/main/resources/config/
+dossiers-service-application/src/main/resources/config/

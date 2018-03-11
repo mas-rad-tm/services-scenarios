@@ -1,11 +1,13 @@
 package ch.globaz.tmmas.rentesservice.infrastructure.dto;
 
+import ch.globaz.tmmas.rentesservice.domain.model.Dossier;
+import ch.globaz.tmmas.rentesservice.domain.model.DossierStatus;
 import ch.globaz.tmmas.rentesservice.infrastructure.dto.localdate.LocalDateDeserializer;
 import ch.globaz.tmmas.rentesservice.infrastructure.dto.localdate.LocalDateSerializer;
-import ch.globaz.tmmas.rentesservice.domain.model.Rente;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Getter;
 import lombok.ToString;
 import org.springframework.hateoas.ResourceSupport;
 
@@ -13,10 +15,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @ToString
-public class RenteDto extends ResourceSupport {
+@Getter
+public class DossierDto extends ResourceSupport {
 
-	private String numero;
+	private String identifiant;
 	private Long requerantId;
+
 	@JsonProperty("id")
 	private Long technicalId;
 
@@ -24,42 +28,30 @@ public class RenteDto extends ResourceSupport {
 	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate dateEnregistrement;
 
+	private DossierStatus status;
 
-	public RenteDto(){}
+
+	public DossierDto(){}
 
 
-	private RenteDto(Long id,String numero, Long requerantId, String dateEnregistrement){
+	private DossierDto(Long id, String numero, Long requerantId, String dateEnregistrement, DossierStatus status){
 
-		this.numero = numero;
+		this.identifiant = numero;
 		this.requerantId = requerantId;
 		this.technicalId = id;
+		this.status = status;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
 		this.dateEnregistrement = LocalDate.parse(dateEnregistrement,formatter);
 	}
 
 
-	public String getNumero() {
-		return numero;
-	}
 
-	public LocalDate getDateEnregistrement() {
-		return dateEnregistrement;
-	}
-
-	public Long getRequerantId () {
-		return requerantId;
-	}
-
-	public Long getTechnicalId(){
-		return technicalId;
-	}
-
-	public static RenteDto fromEntity(Rente rente){
+	public static DossierDto fromEntity(Dossier dossier){
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		return new RenteDto(rente.id(),
-				rente.numero(), rente.requerantId(),
-				rente.dateEnregistrement().format(formatter));
+		return new DossierDto(dossier.id(),
+				dossier.identifiant().identifiant(), dossier.requerantId(),
+				dossier.dateEnregistrement().format(formatter), dossier.status());
 	}
 }

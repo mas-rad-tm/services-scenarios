@@ -1,7 +1,7 @@
 package ch.globaz.tmmas.indexationsearchservice.infrastructure.repository;
 
 
-import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.RenteDto;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.DossierDto;
 import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.localdate.LocalDateDeserializer;
 import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.localdate.LocalDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Document(indexName = "rente", type = "avs")
-public class RenteDocument {
+public class DossierDocument {
 
 
 	private String numero;
@@ -26,10 +26,10 @@ public class RenteDocument {
 	private LocalDate dateEnregistrement;
 
 
-	public RenteDocument(){}
+	public DossierDocument(){}
 
 
-	public RenteDocument(Long id,String numero, Long requerantId, String dateEnregistrement){
+	public DossierDocument(Long id, String numero, Long requerantId, String dateEnregistrement){
 
 		this.id = id;
 		this.numero = numero;
@@ -53,10 +53,10 @@ public class RenteDocument {
 	}
 
 
-	public static RenteDocument fromDto(RenteDto renteDto){
+	public static DossierDocument fromDto(DossierDto dossierDto){
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-		return new RenteDocument(renteDto.getId(),renteDto.getNumero(), renteDto.getRequerantId(), renteDto
+		return new DossierDocument(dossierDto.getId(), dossierDto.getNumero(), dossierDto.getRequerantId(), dossierDto
 				.getDateEnregistrement()
 				.format(formatter));
 	}

@@ -1,19 +1,19 @@
 package ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models;
 
 
-public class RenteEtendueDto {
+public class DossierEtendueDto {
 
-	private RenteDto rente;
+	private DossierDto rente;
 	private PersonnesPhysiqueDto personne;
 
-	public RenteEtendueDto () {}
+	public DossierEtendueDto() {}
 
-	public RenteEtendueDto (RenteDto rente, PersonnesPhysiqueDto personne){
+	public DossierEtendueDto(DossierDto rente, PersonnesPhysiqueDto personne){
 		this.rente = rente;
 		this.personne = personne;
 	}
 
-	public RenteDto getRente () {
+	public DossierDto getRente () {
 		return rente;
 	}
 

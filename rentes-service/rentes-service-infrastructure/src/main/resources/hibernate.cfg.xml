@@ -10,7 +10,7 @@
     <!-- Properties defined here are shared between test and production -->
     <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
     
-    <mapping resource="Rente.hbm.xml" />
+    <mapping resource="Dossier.hbm.xml" />
 
   </session-factory>
 

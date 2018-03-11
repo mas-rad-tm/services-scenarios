@@ -6,7 +6,7 @@ server:
 activemq:
   broker-url: tcp://localhost:61616
   queue:
-    renteCreated: rentes.q
+    renteCreated: dossiers.q
 
 elasticsearch:
   clustername: elasticsearch

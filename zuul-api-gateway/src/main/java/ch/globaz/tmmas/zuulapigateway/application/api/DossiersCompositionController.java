@@ -2,9 +2,9 @@ package ch.globaz.tmmas.zuulapigateway.application.api;
 
 import ch.globaz.tmmas.zuulapigateway.application.datamanagement.SampleDataDto;
 import ch.globaz.tmmas.zuulapigateway.application.dto.PersonnesPhysiqueDto;
-import ch.globaz.tmmas.zuulapigateway.application.dto.RenteDto;
+import ch.globaz.tmmas.zuulapigateway.application.dto.DossierDto;
 import ch.globaz.tmmas.zuulapigateway.application.service.PersonneService;
-import ch.globaz.tmmas.zuulapigateway.application.service.RenteService;
+import ch.globaz.tmmas.zuulapigateway.application.service.DossierService;
 import com.github.javafaker.Faker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,21 +15,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 
 @RestController
 @RequestMapping("/rentes")
-public class RentesCompositionController {
+public class DossiersCompositionController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RentesCompositionController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DossiersCompositionController.class);
 
     @Autowired
     PersonneService personnePhysiqueService;
 
     @Autowired
-    RenteService renteService;
+    DossierService dossierService;
 
     static final Faker faker = new Faker(new Locale("fr"));
 
@@ -54,9 +53,9 @@ public class RentesCompositionController {
         //iteration sur les personnes, et generation des rentes
         personnesPhysiques.getBody().subList(0, nbRentesToGenereateEffective).stream().forEach(personne -> {
 
-            RenteDto rente = RenteDto.from(getNumero(),personne.getId(),"11.11.2111");
+            DossierDto rente = DossierDto.from(getNumero(),personne.getId(),"11.11.2111");
 
-            renteService.sauveRente(rente);
+            dossierService.sauveRente(rente);
 
         });
 
