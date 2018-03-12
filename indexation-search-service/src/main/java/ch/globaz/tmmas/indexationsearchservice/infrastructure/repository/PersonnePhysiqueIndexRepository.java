@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IndexRepository extends ElasticsearchRepository<DossierDocument, Long> {
+public interface PersonnePhysiqueIndexRepository extends ElasticsearchRepository<PersonnePhysiqueDocument, String> {
 
-    Page<DossierDocument> findByNumero(String no, Pageable pageable);
+    Page<PersonnePhysiqueDocument> findByIdentifiant(String no, Pageable pageable);
 
-    List<DossierDocument> findByrequerantId(String title);
+    List<PersonnePhysiqueDocument> findByIdentifiant(String title);
 
 }

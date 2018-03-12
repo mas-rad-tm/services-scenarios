@@ -1,10 +1,13 @@
 package ch.globaz.tmmas.personnes.infrastructure.repository;
 
+import ch.globaz.tmmas.personnes.domain.event.PersonnesPhysiqueCreeEvent;
 import ch.globaz.tmmas.personnes.domain.model.PersonnePhysique;
 import ch.globaz.tmmas.personnes.domain.repository.PersonnePhysiqueRepository;
 import ch.globaz.tmmas.personnes.infrastructure.repository.shared.HibernateRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,10 +20,17 @@ public class PersonnePhysiqueHibernateRepository extends HibernateRepository imp
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PersonnePhysiqueHibernateRepository.class);
 
+	@Autowired
+	ApplicationEventPublisher publisher;
+
 	@Transactional
 	@Override
 	public PersonnePhysique store(PersonnePhysique pp) {
+
 		getSession().save(pp);
+
+		publisher.publishEvent(PersonnesPhysiqueCreeEvent.fromEntity(pp));
+
 		return pp;
 	}
 

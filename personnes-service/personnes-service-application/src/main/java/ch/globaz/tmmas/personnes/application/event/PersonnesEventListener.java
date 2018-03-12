@@ -1,8 +1,8 @@
-package ch.globaz.tmmas.rentesservice.application.event;
+package ch.globaz.tmmas.personnes.application.event;
 
 
-import ch.globaz.tmmas.rentesservice.domain.DossierCreeEvent;
-import ch.globaz.tmmas.rentesservice.domain.NotificationService;
+import ch.globaz.tmmas.personnes.domain.event.PersonnesPhysiqueCreeEvent;
+import ch.globaz.tmmas.personnes.domain.notification.NotificationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -12,9 +12,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DossiersEventListener {
+public class PersonnesEventListener {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DossiersEventListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonnesEventListener.class);
 
     @Autowired
     NotificationService notificationService;
@@ -23,9 +23,9 @@ public class DossiersEventListener {
     ObjectMapper mapper;
 
     @EventListener
-    void rentesCreesEvent(DossierCreeEvent event) throws JsonProcessingException {
+    void personneCreeEventListener(PersonnesPhysiqueCreeEvent event) throws JsonProcessingException {
 
-        LOGGER.info("RenteCree Event {}",event);
+        LOGGER.info("PersonnePhysiqueCree Event {}",event);
 
         notificationService.notify(mapper.writeValueAsString(event));
 

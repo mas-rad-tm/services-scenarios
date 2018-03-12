@@ -1,8 +1,13 @@
 package ch.globaz.tmmas.indexationsearchservice.infrastructure.jms;
 
-import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.IndexRepository;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.jms.event.DossierCreeEvent;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.jms.event.PersonnesPhysiqueCreeEvent;
 import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.DossierDocument;
-import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.DossierDto;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.DossierIndexRepository;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.PersonnePhysiqueDocument;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.PersonnePhysiqueIndexRepository;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.dto.DossierDto;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.dto.PersonnesPhysiqueDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,32 +23,50 @@ public class IndexationListener {
 
 
     @Autowired
-    IndexRepository indexRepository;
+    PersonnePhysiqueIndexRepository personnePhysiqueIndexRepository;
+
+    @Autowired
+    DossierIndexRepository dossierIndexRepository;
 
     @Autowired
     ObjectMapper mapper;
 
     @JmsListener(destination = "rentes.q",containerFactory = "jmsListenerContainerFactory")
-    @JmsListener(destination = "personnes.q",containerFactory = "jmsListenerContainerFactory")
-    public void onMessageAll(String rente) {
+    public void onDossierMessage(String rente) {
+
         LOGGER.info("received message='{}'", rente);
-
-
 
         try {
 
-            DossierDto dto = mapper.readValue(rente,DossierDto.class);
+            DossierCreeEvent event = mapper.readValue(rente,DossierCreeEvent.class);
 
-            indexRepository.save(DossierDocument.fromDto(dto));
+            dossierIndexRepository.save(DossierDocument.fromEvent(event));
 
             LOGGER.info("Successfully indexed'{}'", rente);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
 
+    @JmsListener(destination = "personnes.q",containerFactory = "jmsListenerContainerFactory")
+    public void onPersonneMessage(String personne) {
+
+        LOGGER.info("received message='{}'", personne);
+
+        try {
+
+            PersonnesPhysiqueCreeEvent event = mapper.readValue(personne,PersonnesPhysiqueCreeEvent.class);
+
+            personnePhysiqueIndexRepository.save(PersonnePhysiqueDocument.fromEvent(event));
+
+            LOGGER.info("Successfully indexed'{}'", personne);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
+
 
 
 

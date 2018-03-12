@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
 
-    <artifactId>dossiers-service-infrastructure</artifactId>
+    <artifactId>rentes-service-infrastructure</artifactId>
 
 
     <dependencies>

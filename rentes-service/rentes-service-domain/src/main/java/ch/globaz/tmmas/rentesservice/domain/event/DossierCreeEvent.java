@@ -1,12 +1,13 @@
-package ch.globaz.tmmas.rentesservice.domain;
+package ch.globaz.tmmas.rentesservice.domain.event;
 
+import ch.globaz.tmmas.rentesservice.domain.ValueObject;
 import ch.globaz.tmmas.rentesservice.domain.model.Dossier;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @EqualsAndHashCode
 @ToString
-public class DossierCreeEvent implements ValueObject<DossierCreeEvent>{
+public class DossierCreeEvent implements ValueObject<DossierCreeEvent> {
 
     private Dossier dossier;
 
@@ -15,7 +16,7 @@ public class DossierCreeEvent implements ValueObject<DossierCreeEvent>{
         this.dossier = dossier;
     }
 
-    public Dossier rente() {
+    public Dossier getDossier() {
         return dossier;
     }
 

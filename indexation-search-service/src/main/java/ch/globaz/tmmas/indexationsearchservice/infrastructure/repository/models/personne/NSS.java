@@ -1,6 +1,6 @@
-package ch.globaz.tmmas.personnes.domain.model;
+package ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.personne;
 
-import ch.globaz.tmmas.personnes.domain.ValueObject;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.ValueObject;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @EqualsAndHashCode
 @Getter
-public class NSS implements ValueObject<NSS>{
+public class NSS implements ValueObject<NSS> {
 
     NSS () {}
 

@@ -1,6 +1,6 @@
-package ch.globaz.tmmas.rentesservice.infrastructure.jms;
+package ch.globaz.tmmas.personnes.infrastructure.jms;
 
-import ch.globaz.tmmas.rentesservice.domain.NotificationService;
+import ch.globaz.tmmas.personnes.domain.notification.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

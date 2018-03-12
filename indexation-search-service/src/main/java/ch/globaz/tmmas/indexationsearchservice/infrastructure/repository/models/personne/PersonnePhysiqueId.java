@@ -1,16 +1,15 @@
-package ch.globaz.tmmas.personnes.domain.model;
+package ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.personne;
 
-import ch.globaz.tmmas.personnes.domain.ValueObject;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.ValueObject;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
-import java.util.Random;
 import java.util.UUID;
 
 @EqualsAndHashCode
 @Getter
-public class PersonnePhysiqueId implements ValueObject<PersonnePhysiqueId>{
+public class PersonnePhysiqueId implements ValueObject<PersonnePhysiqueId> {
 
     @NotNull(message = "L'identifiant ne peut pas être null")
     private String identifiant;

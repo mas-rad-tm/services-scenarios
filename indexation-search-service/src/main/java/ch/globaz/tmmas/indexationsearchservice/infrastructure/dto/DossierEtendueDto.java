@@ -1,4 +1,4 @@
-package ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models;
+package ch.globaz.tmmas.indexationsearchservice.infrastructure.dto;
 
 
 public class DossierEtendueDto {

@@ -1,12 +1,11 @@
-package ch.globaz.tmmas.personnes.domain.model;
+package ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.personne;
 
-import ch.globaz.tmmas.personnes.domain.Entity;
+import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.Entity;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.UUID;
 
 /**
  * Created by seb on .
@@ -15,7 +14,7 @@ import java.util.UUID;
  */
 @ToString
 @Getter
-public class PersonnePhysique implements Entity<PersonnePhysique>{
+public class PersonnePhysique implements Entity<PersonnePhysique> {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
@@ -33,7 +32,7 @@ public class PersonnePhysique implements Entity<PersonnePhysique>{
         this.identifiant = PersonnePhysiqueId.aleatoire();
     }
 
-   public PersonnePhysique(Long id,String nom, String prenom, LocalDate dateNaissance, NSS nss) {
+   public PersonnePhysique(Long id, String nom, String prenom, LocalDate dateNaissance, NSS nss) {
         this.nom = nom;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;

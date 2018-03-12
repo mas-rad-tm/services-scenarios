@@ -1,19 +1,12 @@
-package ch.globaz.tmmas.rentesservice.application.configuration;
+package ch.globaz.tmmas.personnes.application.configuration;
 
-
-
-import ch.globaz.tmmas.rentesservice.infrastructure.jms.MessageSender;
+import ch.globaz.tmmas.personnes.infrastructure.jms.MessageSender;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.activemq.RedeliveryPolicy;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
-import org.springframework.jms.support.converter.MessageConverter;
-import org.springframework.jms.support.converter.MessageType;
 
 import java.util.Arrays;
 
@@ -23,7 +16,7 @@ public class MessagingConfiguration {
     @Value("${activemq.broker-url}")
     private String brokerUrl;
 
-    private static final String RENTE_QUEUE = "rentes.q";
+    private static final String PERSONNE_QUEUE = "personnes.q";
 
     @Bean
     public ActiveMQConnectionFactory connectionFactory(){
@@ -45,11 +38,34 @@ public class MessagingConfiguration {
     public JmsTemplate jmsTemplate(){
         JmsTemplate template = new JmsTemplate();
         template.setConnectionFactory(cachingConnectionFactory());
-        template.setDefaultDestinationName(RENTE_QUEUE);
+        template.setDefaultDestinationName(PERSONNE_QUEUE);
         return template;
     }
 
+/*
+    @Bean
+    public RedeliveryPolicy redeliveryPolicy () {
+        RedeliveryPolicy policy = new RedeliveryPolicy();
+        policy.setBackOffMultiplier(2);
+        policy.setInitialRedeliveryDelay(1500);
+        policy.setMaximumRedeliveries(3);
+        policy.setQueue("*");
+        policy.setRedeliveryDelay(1500);
+        policy.setUseExponentialBackOff(true);
+        return policy;
+    }
 
+    @Bean
+    public InitializingBean connectionFactory(ActiveMQConnectionFactory connectionFactory)
+    {
+        return () ->
+        {
+            RedeliveryPolicy redeliveryPolicy = new RedeliveryPolicy();
+            // configure redelivery policy
+            connectionFactory.setRedeliveryPolicy(redeliveryPolicy());
+        };
+    }
+*/
     @Bean
     public MessageSender sender() {
         return new MessageSender();

@@ -1,4 +1,4 @@
-package ch.globaz.tmmas.rentesservice.domain.model;
+package ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.dossier;
 
 import ch.globaz.tmmas.rentesservice.domain.Entity;
 import lombok.EqualsAndHashCode;
@@ -58,4 +58,6 @@ public class Dossier implements Entity<Dossier>{
     public boolean sameIdentityAs(Dossier dossier) {
         return this.identifiant.equals(dossier.identifiant());
     }
+
+
 }

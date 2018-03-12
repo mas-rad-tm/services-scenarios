@@ -1,4 +1,4 @@
-package ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models;
+package ch.globaz.tmmas.indexationsearchservice.infrastructure.dto;
 
 
 
@@ -6,16 +6,18 @@ import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.
 import ch.globaz.tmmas.indexationsearchservice.infrastructure.repository.models.localdate.LocalDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Getter;
 
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
+@Getter
 public class PersonnesPhysiqueDto {
 
 	private String nom;
 	private String prenom;
+	private String identifiant;
 
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)
@@ -29,7 +31,7 @@ public class PersonnesPhysiqueDto {
 	public PersonnesPhysiqueDto(){}
 
 
-	private PersonnesPhysiqueDto(Long id,String nom, String prenom, String dateNaissance, String nss){
+	private PersonnesPhysiqueDto(Long id,String identifiant,String nom, String prenom, String dateNaissance, String nss){
 
 		this.nom = nom;
 		this.prenom = prenom;
@@ -38,28 +40,11 @@ public class PersonnesPhysiqueDto {
 		this.dateNaissance = LocalDate.parse(dateNaissance,formatter);
 		this.nss = nss;
 		this.id = id;
+		this.identifiant = identifiant;
 	}
 
 
-	public String getNom() {
-		return nom;
-	}
 
-	public LocalDate getDateNaissance() {
-		return dateNaissance;
-	}
-
-	public String getPrenom () {
-		return prenom;
-	}
-
-	public String getNss () {
-		return nss;
-	}
-
-	public Long getId(){
-		return id;
-	}
 
 
 }
