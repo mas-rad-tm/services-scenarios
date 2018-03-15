@@ -78,19 +78,19 @@
             <!-- ********************************* -->
             <dependency>
                 <groupId>ch.globaz.tmmas</groupId>
-                <artifactId>dossiers-service-application</artifactId>
+                <artifactId>rentes-service-application</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>ch.globaz.tmmas</groupId>
-                <artifactId>dossiers-service-domain</artifactId>
+                <artifactId>rentes-service-domain</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>ch.globaz.tmmas</groupId>
-                <artifactId>dossiers-service-infrastructure</artifactId>
+                <artifactId>rentes-service-infrastructure</artifactId>
                 <version>${project.parent.version}</version>
             </dependency>
 

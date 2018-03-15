@@ -1,7 +1,8 @@
 package ch.globaz.tmmas.rentesservice.infrastructure.repository;
 
-import ch.globaz.tmmas.rentesservice.domain.DossierCreeEvent;
 
+
+import ch.globaz.tmmas.rentesservice.domain.event.DossierCreeEvent;
 import ch.globaz.tmmas.rentesservice.domain.model.Dossier;
 import ch.globaz.tmmas.rentesservice.domain.repository.DossierRepository;
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ public class DossierHibernateRepository extends HibernateRepository implements D
 
 		getSession().saveOrUpdate(dossier);
 
-		publisher.publishEvent(new DossierCreeEvent(dossier));
+		publisher.publishEvent(DossierCreeEvent.fromEntity(dossier));
 
 		return dossier;
 	}
