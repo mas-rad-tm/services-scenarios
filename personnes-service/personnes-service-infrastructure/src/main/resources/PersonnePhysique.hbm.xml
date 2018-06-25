@@ -16,8 +16,13 @@
 
         <property name="dateNaissance" column="dateNaissance" not-null="true"/>
 
-        <property name="nss" column="nss" not-null="true"/>
+        <property name="creationDate" type="timestamp" not-null="true" />
 
+        <property name="lastUpdateDate" type="timestamp" not-null="true" />
+
+        <component name="nss" unique="true" update="false" >
+            <property name="nss" column="nss" not-null="true"/>
+        </component>
 
         <component name="identifiant" unique="true" update="false" >
             <property name="identifiant" column="identifiant" not-null="true"/>

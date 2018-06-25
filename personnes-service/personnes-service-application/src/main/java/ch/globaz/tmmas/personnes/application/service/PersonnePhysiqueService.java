@@ -9,7 +9,9 @@ public interface PersonnePhysiqueService {
 
 	PersonnePhysique sauve(PersonnePhysique helloWorld);
 
-	List<PersonnePhysique> getAll();
+    void genereteRandomAccessDatas(Integer nbElements);
+
+    List<PersonnePhysique> getAll();
 
 	Long countPersonnePhysique();
 

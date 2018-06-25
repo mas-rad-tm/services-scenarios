@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -24,6 +25,8 @@ public class PersonnePhysique implements Entity<PersonnePhysique>{
     private LocalDate dateNaissance;
     private NSS nss;
     private PersonnePhysiqueId identifiant;
+    private Date lastUpdateDate;
+    private Date creationDate;
 
     private PersonnePhysique(String nom, String prenom, LocalDate dateNaissance, NSS nss) {
         this.nom = nom;
@@ -31,6 +34,7 @@ public class PersonnePhysique implements Entity<PersonnePhysique>{
         this.dateNaissance = dateNaissance;
         this.nss = nss;
         this.identifiant = PersonnePhysiqueId.aleatoire();
+
     }
 
    public PersonnePhysique(Long id,String nom, String prenom, LocalDate dateNaissance, NSS nss) {
@@ -40,6 +44,22 @@ public class PersonnePhysique implements Entity<PersonnePhysique>{
         this.nss = nss;
         this.identifiant = PersonnePhysiqueId.aleatoire();
         this.id = id;
+    }
+
+    public Date lastUpdateDate(){
+        return lastUpdateDate;
+    }
+
+    public Date creationDate(){
+        return creationDate;
+    }
+
+    public void lastUpdateDate(Date date){
+        this.lastUpdateDate = date;
+    }
+
+    public void creationDate(Date date){
+        this.creationDate = date;
     }
 
     public String nom() {

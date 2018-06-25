@@ -8,9 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,11 +29,34 @@ public class PersonnePhysiqueHibernateRepository extends HibernateRepository imp
 	@Override
 	public PersonnePhysique store(PersonnePhysique pp) {
 
+		pp.creationDate(new Date());
+		pp.lastUpdateDate(new Date());
+
 		getSession().save(pp);
 
 		publisher.publishEvent(PersonnesPhysiqueCreeEvent.fromEntity(pp));
 
 		return pp;
+	}
+
+	@Transactional
+	@Override
+	@Async
+	public void storeAndFlush(List<PersonnePhysique> pps) {
+
+		pps.forEach(personnePhysique ->{
+			personnePhysique.lastUpdateDate(new Date());
+			personnePhysique.creationDate(new Date());
+			getSession().save(personnePhysique);
+		});
+		getSession().flush();
+		getSession().clear();
+
+		pps.forEach(personnePhysique ->{
+			publisher.publishEvent(PersonnesPhysiqueCreeEvent.fromEntity(personnePhysique));
+		});
+
+
 	}
 
 	@Transactional
