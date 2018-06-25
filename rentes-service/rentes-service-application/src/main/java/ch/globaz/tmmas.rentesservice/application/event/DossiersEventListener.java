@@ -1,8 +1,9 @@
 package ch.globaz.tmmas.rentesservice.application.event;
 
 
-import ch.globaz.tmmas.rentesservice.domain.DossierCreeEvent;
-import ch.globaz.tmmas.rentesservice.domain.NotificationService;
+
+import ch.globaz.tmmas.rentesservice.domain.event.DossierCreeEvent;
+import ch.globaz.tmmas.rentesservice.domain.notification.NotificationService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
